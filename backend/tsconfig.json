@@ -17,7 +17,9 @@
       "@routes/*": ["routes/*"],
       "@controllers/*": ["controllers/*"],
       "@config/*": ["config/*"],
-      "@database/*": ["database/*"]
+      "@database/*": ["database/*"],
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"]
     }
   },
   "include": ["src/**/*.ts"],
