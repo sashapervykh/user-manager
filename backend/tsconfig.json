@@ -19,7 +19,8 @@
       "@config/*": ["config/*"],
       "@database/*": ["database/*"],
       "@models/*": ["models/*"],
-      "@services/*": ["services/*"]
+      "@services/*": ["services/*"],
+      "@errors/*": ["errors/*"]
     }
   },
   "include": ["src/**/*.ts"],
