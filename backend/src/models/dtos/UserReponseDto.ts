@@ -2,5 +2,5 @@ import { User } from "@models/entities/user.entity.js";
 
 export type UserResponseDto = Omit<
   User,
-  "passwordHash" | "verificationToken"
+  "password_hash" | "verification_token"
 > & { id: string };

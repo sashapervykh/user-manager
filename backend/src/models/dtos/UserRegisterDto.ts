@@ -3,9 +3,9 @@ import { User } from "@models/entities/user.entity.js";
 export type UserRegisterDto = Omit<
   User,
   | "id"
-  | "passwordHash"
+  | "password_hash"
   | "status"
-  | "createdAt"
-  | "lastLoginAt"
-  | "verificationToken"
+  | "created_at"
+  | "last_login_at"
+  | "verification_token"
 > & { password: string };

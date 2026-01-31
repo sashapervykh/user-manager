@@ -8,6 +8,6 @@ export interface User {
   job?: string | null;
   status: UserStatus;
   created_at: Date;
-  lastLogin_at: Date | null;
+  last_login_at: Date | null;
   verification_token: string | null;
 }
