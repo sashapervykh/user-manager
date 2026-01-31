@@ -1,12 +1,12 @@
 import pool from "@config/db.js";
 import { DuplicationError } from "@errors/DuplicationError.js";
-import { User } from "@models/entities/user.entity.js";
+import { UserCreateDTO } from "@models/dtos/UserCreateDto.js";
 import { DatabaseError } from "pg";
 
 class Database {
   private pool = pool;
 
-  async createUser(user: User) {
+  async createUser(user: UserCreateDTO) {
     try {
       const {
         first_name,

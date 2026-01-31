@@ -1,7 +1,5 @@
-import { UserStatus } from "@models/types/userStatus.type.js";
-
-export const USER_STATUS: { [key: string]: UserStatus } = {
+export const USER_STATUS = {
   active: "active",
   blocked: "blocked",
   unverified: "unverified",
-};
+} as const;
