@@ -16,7 +16,8 @@
     "paths": {
       "@routes/*": ["routes/*"],
       "@controllers/*": ["controllers/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@database/*": ["database/*"]
     }
   },
   "include": ["src/**/*.ts"],

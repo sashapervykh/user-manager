@@ -12,6 +12,7 @@ export default [
     ...config,
     files: ["**/*.ts"],
     languageOptions: {
+      parser: tseslint.parser,
       parserOptions: {
         project: "./tsconfig.json",
         sourceType: "module",
