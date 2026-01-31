@@ -1,0 +1,6 @@
+export const STATUS_CODES = {
+  BAD_REQUEST: 400,
+  CREATED: 201,
+  CONFLICT: 409,
+  INTERNAL_ERROR: 500,
+};

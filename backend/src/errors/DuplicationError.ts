@@ -1,8 +1,10 @@
-import { DatabaseError } from "./DatabaseError.js";
+import { STATUS_CODES } from "@constants/statusCodes.js";
 
-export class DuplicationError extends DatabaseError {
+import { AppError } from "./AppError.js";
+
+export class DuplicationError extends AppError {
   constructor() {
-    super("Email already exists", 409);
+    super("Email already exists", STATUS_CODES.CONFLICT);
     this.name = "Duplication Error";
   }
 }

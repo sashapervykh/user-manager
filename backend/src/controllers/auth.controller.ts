@@ -1,27 +1,28 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UserRegisterDto } from "@models/dtos/UserRegisterDto.js";
 import { authService } from "@services/auth.service.js";
+import { ValidationError } from "@errors/ValidationError.js";
+import { STATUS_CODES } from "@constants/statusCodes.js";
 
 class AuthController {
   authService = authService;
 
-  register = async (req: Request<{}, {}, UserRegisterDto>, res: Response) => {
+  register = async (
+    req: Request<{}, {}, UserRegisterDto>,
+    res: Response,
+    next: NextFunction,
+  ) => {
     try {
-      console.log(req.body);
       const { email, password, first_name, last_name } = req.body ?? {};
       if (!email || !password || !first_name || !last_name) {
-        console.log("none");
-        res.status(400).send({
-          message: `Not all required field was provided! Check first name, last name, email and password once again.`,
-        });
-        return;
+        throw new ValidationError();
       }
       const user = await authService.register(req.body);
-      res.status(201).json({ message: "User registered successfully", user });
-    } catch (error) {
       res
-        .status(409)
-        .json({ message: "User was already existed", error: error });
+        .status(STATUS_CODES.CREATED)
+        .json({ message: "User registered successfully", user });
+    } catch (error) {
+      next(error);
     }
   };
 }

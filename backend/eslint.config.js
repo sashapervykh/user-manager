@@ -27,6 +27,7 @@ export default [
     },
     rules: {
       "no-console": "off",
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_" },

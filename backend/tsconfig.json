@@ -20,7 +20,9 @@
       "@database/*": ["database/*"],
       "@models/*": ["models/*"],
       "@services/*": ["services/*"],
-      "@errors/*": ["errors/*"]
+      "@errors/*": ["errors/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@constants/*": ["constants/*"]
     }
   },
   "include": ["src/**/*.ts"],
