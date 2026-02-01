@@ -1,5 +1,5 @@
 export const USER_STATUS = {
-  active: "active",
-  blocked: "blocked",
-  unverified: "unverified",
+  ACTIVE: "active",
+  BLOCKED: "blocked",
+  UNVERIFIED: "unverified",
 } as const;

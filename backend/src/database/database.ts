@@ -1,6 +1,7 @@
 import pool from "@config/db.js";
 import { DuplicationError } from "@errors/DuplicationError.js";
 import { UserCreateDTO } from "@models/dtos/UserCreateDto.js";
+import { User } from "@models/entities/user.entity.js";
 import { DatabaseError } from "pg";
 
 class Database {
@@ -39,6 +40,34 @@ class Database {
       }
       throw error;
     }
+  }
+
+  async getUserById(id: string) {
+    const query = `
+  SELECT id, first_name, last_name, email, password_hash, job, status, created_at, last_login_at
+  FROM users 
+  WHERE id = $1`;
+    const result = await this.pool.query<User>(query, [id]);
+    return result.rows.length === 0 ? undefined : result.rows[0];
+  }
+
+  async getUserByEmail(email: string) {
+    const query = `
+  SELECT id, first_name, last_name, email, password_hash, job, status, created_at, last_login_at
+  FROM users 
+  WHERE email = $1`;
+    const result = await this.pool.query<User>(query, [email]);
+    return result.rows.length === 0 ? undefined : result.rows[0];
+  }
+
+  async updateLastLoginAt(id: string) {
+    const query = `
+  UPDATE USERS
+  SET last_login_at = CURRENT_TIMESTAMP 
+  WHERE id = $1
+  RETURNING last_login_at`;
+    const result = await this.pool.query<User>(query, [id]);
+    return result.rows[0]?.last_login_at;
   }
 }
 

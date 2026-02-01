@@ -1,6 +1,7 @@
 import { UserStatus } from "@models/types/userStatus.type.js";
 
 export interface User {
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -9,5 +10,5 @@ export interface User {
   status: UserStatus;
   created_at: Date;
   last_login_at: Date | null;
-  verification_token: string | null;
+  verification_token?: string | null;
 }

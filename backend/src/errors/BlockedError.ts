@@ -4,9 +4,9 @@ import { ERROR_NAMES } from "@constants/errorNames.js";
 
 import { AppError } from "./AppError.js";
 
-export class DuplicationError extends AppError {
+export class BlockedError extends AppError {
   constructor() {
-    super(ERROR_MESSAGES.DUPLICATION_ERROR, STATUS_CODES.CONFLICT);
-    this.name = ERROR_NAMES.DUPLICATION_ERROR;
+    super(ERROR_MESSAGES.BLOCKED_ERROR, STATUS_CODES.FORBIDDEN);
+    this.name = ERROR_NAMES.BLOCKED_ERROR;
   }
 }
