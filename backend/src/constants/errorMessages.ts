@@ -7,4 +7,7 @@ export const ERROR_MESSAGES = {
   DUPLICATION_ERROR: "Email already exists",
   AUTHENTICATION_ERROR: "Invalid email or password",
   BLOCKED_ERROR: "Your account has been blocked by you or other user",
+  NO_TOKEN_ERROR: "No token provided",
+  INVALID_TOKEN: "Invalid token",
+  NOT_EXIST: "User with this token does not exist",
 };

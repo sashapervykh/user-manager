@@ -3,4 +3,5 @@ export const ERROR_NAMES = {
   VALIDATION_ERROR: "Validation Error",
   AUTHENTICATION_ERROR: "Authentication Error",
   BLOCKED_ERROR: "Blocked Error",
+  JWT_ERROR: "JWT Error",
 };
