@@ -55,7 +55,8 @@ class Database {
     const query = `
   UPDATE USERS
   SET last_login_at = CURRENT_TIMESTAMP 
-  WHERE id = $1`;
+  WHERE id = $1
+  RETURNING last_login_at`;
     const result = await this.pool.query<User>(query, [id]);
     return result.rows[0]?.last_login_at;
   }
