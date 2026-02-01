@@ -1,9 +1,8 @@
+import { authController } from "@controllers/auth.controller.js";
 import { Router } from "express";
 
 const authRouter = Router();
 
-authRouter.post("/register", (req, res) => {
-  res.status(501).json({ message: "Register endpoint not implemented yet" });
-});
+authRouter.post("/register", authController.register);
 
 export default authRouter;

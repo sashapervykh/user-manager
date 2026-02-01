@@ -16,7 +16,13 @@
     "paths": {
       "@routes/*": ["routes/*"],
       "@controllers/*": ["controllers/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@database/*": ["database/*"],
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@errors/*": ["errors/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@constants/*": ["constants/*"]
     }
   },
   "include": ["src/**/*.ts"],
