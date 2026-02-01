@@ -37,6 +37,7 @@ class AuthController {
       if (!email || !password) {
         throw new ValidationError(ERROR_MESSAGES.LOGIN_VALIDATION_ERROR);
       }
+      this.authService.login({ email, password });
     } catch (error) {
       next(error);
     }

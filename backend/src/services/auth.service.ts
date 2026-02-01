@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { database } from "@database/database.js";
 import { UserRegisterDto } from "@models/dtos/UserRegisterDto.js";
 import { USER_STATUS } from "@constants/userStatus.js";
+import { UserLoginDto } from "@models/dtos/UserLoginDto.js";
 
 class AuthService {
   private database = database;
@@ -18,6 +19,12 @@ class AuthService {
       password_hash,
       verification_token,
     });
+  }
+
+  async login(userLoginDto: UserLoginDto) {
+    const { email, password } = userLoginDto;
+    const user = await this.database.getUserByEmail(email);
+    console.log(user);
   }
 
   private getVerificationToken() {

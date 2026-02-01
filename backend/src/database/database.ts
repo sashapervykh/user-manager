@@ -1,6 +1,7 @@
 import pool from "@config/db.js";
 import { DuplicationError } from "@errors/DuplicationError.js";
 import { UserCreateDTO } from "@models/dtos/UserCreateDto.js";
+import { User } from "@models/entities/user.entity.js";
 import { DatabaseError } from "pg";
 
 class Database {
@@ -39,6 +40,15 @@ class Database {
       }
       throw error;
     }
+  }
+
+  async getUserByEmail(email: string) {
+    const query = `
+  SELECT id, first_name, last_name, email, password_hash, job, status, created_at, last_login_at
+  FROM users 
+  WHERE email = $1`;
+    const result = await this.pool.query<User>(query, [email]);
+    return result.rows[0];
   }
 }
 
