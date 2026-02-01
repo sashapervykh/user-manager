@@ -5,6 +5,8 @@ import { database } from "@database/database.js";
 import { UserRegisterDto } from "@models/dtos/UserRegisterDto.js";
 import { USER_STATUS } from "@constants/userStatus.js";
 import { UserLoginDto } from "@models/dtos/UserLoginDto.js";
+import { AuthenticationError } from "@errors/AuthenticationError.js";
+import { BlockedError } from "@errors/BlockedError.js";
 
 class AuthService {
   private database = database;
@@ -15,7 +17,7 @@ class AuthService {
     const verification_token = this.getVerificationToken();
     return await this.database.createUser({
       ...userData,
-      status: USER_STATUS.unverified,
+      status: USER_STATUS.UNVERIFIED,
       password_hash,
       verification_token,
     });
@@ -24,9 +26,14 @@ class AuthService {
   async login(userLoginDto: UserLoginDto) {
     const { email, password } = userLoginDto;
     const user = await this.database.getUserByEmail(email);
-    const isCorrect = this.verifyPassword(password, user.password_hash);
-    if (!user && !isCorrect) {
+    const isCorrect = await this.verifyPassword(password, user.password_hash);
+    if (!user || !isCorrect) {
+      throw new AuthenticationError();
     }
+    if (user.status === USER_STATUS.BLOCKED) {
+      throw new BlockedError();
+    }
+    return user;
   }
 
   private getVerificationToken() {

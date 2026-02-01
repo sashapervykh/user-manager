@@ -37,7 +37,8 @@ class AuthController {
       if (!email || !password) {
         throw new ValidationError(ERROR_MESSAGES.LOGIN_VALIDATION_ERROR);
       }
-      this.authService.login({ email, password });
+      const user = await this.authService.login({ email, password });
+      res.status(STATUS_CODES.OK).send(user);
     } catch (error) {
       next(error);
     }
