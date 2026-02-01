@@ -39,7 +39,7 @@ class AuthService {
       throw new BlockedError();
     }
     const token = this.getJwtToken(user.id);
-    return user;
+    return { user, token };
   }
 
   private getEmailToken() {
