@@ -5,4 +5,6 @@ export const ERROR_MESSAGES = {
     "Not all required fields are provided. Email and password are required.",
   INTERNAL_ERROR: "Unknown internal error",
   DUPLICATION_ERROR: "Email already exists",
+  AUTHENTICATION_ERROR: "Invalid email or password",
+  BLOCKED_ERROR: "Your account has been blocked by you or other user",
 };

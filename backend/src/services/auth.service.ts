@@ -24,7 +24,9 @@ class AuthService {
   async login(userLoginDto: UserLoginDto) {
     const { email, password } = userLoginDto;
     const user = await this.database.getUserByEmail(email);
-    console.log(user);
+    const isCorrect = this.verifyPassword(password, user.password_hash);
+    if (!user && !isCorrect) {
+    }
   }
 
   private getVerificationToken() {
