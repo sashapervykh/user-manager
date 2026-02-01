@@ -1,4 +1,6 @@
 import pool from "@config/db.js";
+import { SORT_COLUMNS } from "@constants/sortColumns.js";
+import { SORT_ORDER } from "@constants/sortOrder.js";
 import { DuplicationError } from "@errors/DuplicationError.js";
 import { UserCreateDTO } from "@models/dtos/UserCreateDto.js";
 import { User } from "@models/entities/user.entity.js";
@@ -40,6 +42,24 @@ class Database {
       }
       throw error;
     }
+  }
+
+  async getAllUsers(
+    sortBy = SORT_COLUMNS.LAST_LOGIN_AT,
+    sortOrder = SORT_ORDER.DESC,
+  ) {
+    const safeSortColumn = Object.values(SORT_COLUMNS).includes(sortBy)
+      ? sortBy
+      : SORT_COLUMNS.LAST_LOGIN_AT;
+    const safeSortOrder = Object.values(SORT_ORDER).includes(sortOrder)
+      ? sortOrder
+      : SORT_ORDER.DESC;
+    const query = `
+  SELECT id, first_name, last_name, email, job, status, created_at, last_login_at
+  FROM users
+  ORDER BY ${safeSortColumn} ${safeSortOrder}`;
+    const result = await this.pool.query<User>(query);
+    return result.rows;
   }
 
   async getUserById(id: string) {

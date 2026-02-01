@@ -7,7 +7,7 @@ import { ERROR_MESSAGES } from "@constants/errorMessages.js";
 import { UserLoginDto } from "@models/dtos/UserLoginDto.js";
 
 class AuthController {
-  authService = authService;
+  private authService = authService;
 
   register = async (
     req: Request<{}, {}, UserRegisterDto>,
