@@ -1,7 +1,7 @@
 import pool from "@config/db.js";
 import { DuplicationError } from "@errors/DuplicationError.js";
 import { UserCreateDTO } from "@models/dtos/UserCreateDto.js";
-import { User } from "@models/entities/user.entity.js";
+import { UserResponseDto } from "@models/dtos/UserReponseDto.js";
 import { DatabaseError } from "pg";
 
 class Database {
@@ -47,8 +47,8 @@ class Database {
   SELECT id, first_name, last_name, email, password_hash, job, status, created_at, last_login_at
   FROM users 
   WHERE email = $1`;
-    const result = await this.pool.query<User>(query, [email]);
-    return result.rows[0];
+    const result = await this.pool.query<UserResponseDto>(query, [email]);
+    return result.rows.length === 0 ? undefined : result.rows[0];
   }
 }
 
