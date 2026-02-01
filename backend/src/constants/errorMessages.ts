@@ -1,0 +1,6 @@
+export const ERROR_MESSAGES = {
+  REGISTER_VALIDATION_ERROR:
+    "Not all required fields are provided. First name, last name, email and password are required.",
+  LOGIN_VALIDATION_ERROR:
+    "Not all required fields are provided. Email and password are required.",
+};
