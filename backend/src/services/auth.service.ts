@@ -31,15 +31,20 @@ class AuthService {
     if (!user) {
       throw new AuthenticationError();
     }
-    const isCorrect = await this.verifyPassword(password, user.password_hash);
+    const { password_hash, ...responseData } = user;
+    const isCorrect = await this.verifyPassword(password, password_hash);
     if (!isCorrect) {
       throw new AuthenticationError();
     }
     if (user.status === USER_STATUS.BLOCKED) {
       throw new BlockedError();
     }
+    const newLoginTime = await this.database.updateLastLoginAt(user.id);
     const token = this.getJwtToken(user.id);
-    return { user, token };
+    if (!newLoginTime) {
+      throw new AuthenticationError();
+    }
+    return { user: { ...responseData, last_login_at: newLoginTime }, token };
   }
 
   private getEmailToken() {

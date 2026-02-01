@@ -50,6 +50,15 @@ class Database {
     const result = await this.pool.query<User>(query, [email]);
     return result.rows.length === 0 ? undefined : result.rows[0];
   }
+
+  async updateLastLoginAt(id: string) {
+    const query = `
+  UPDATE USERS
+  SET last_login_at = CURRENT_TIMESTAMP 
+  WHERE id = $1`;
+    const result = await this.pool.query<User>(query, [id]);
+    return result.rows[0]?.last_login_at;
+  }
 }
 
 export const database = new Database();

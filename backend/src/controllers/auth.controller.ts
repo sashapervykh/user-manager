@@ -4,6 +4,7 @@ import { authService } from "@services/auth.service.js";
 import { ValidationError } from "@errors/ValidationError.js";
 import { STATUS_CODES } from "@constants/statusCodes.js";
 import { ERROR_MESSAGES } from "@constants/errorMessages.js";
+import { UserLoginDto } from "@models/dtos/UserLoginDto.js";
 
 class AuthController {
   authService = authService;
@@ -28,7 +29,7 @@ class AuthController {
   };
 
   login = async (
-    req: Request<{}, {}, UserRegisterDto>,
+    req: Request<{}, {}, UserLoginDto>,
     res: Response,
     next: NextFunction,
   ) => {
