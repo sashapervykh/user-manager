@@ -18,23 +18,6 @@ class Database {
     await this.pool.query(query, [ids]);
   }
 
-  async unblockUsers(ids: string[]) {
-    console.log("start", ids);
-    const query = `
-  UPDATE users
-  SET status = CASE 
-    WHEN verification_token IS NOT NULL THEN $1::user_status
-    ELSE $2::user_status
-  END
-  WHERE id = ANY($3::uuid[]) AND status = $4::user_status`;
-    await this.pool.query(query, [
-      USER_STATUS.UNVERIFIED,
-      USER_STATUS.ACTIVE,
-      ids,
-      USER_STATUS.BLOCKED,
-    ]);
-  }
-
   async createUser(user: UserCreateDTO) {
     try {
       const {
@@ -81,8 +64,7 @@ class Database {
     const query = `
   DELETE FROM USERS
   WHERE status = $1::user_status`;
-    const result = await this.pool.query<User>(query, [USER_STATUS.UNVERIFIED]);
-    return result.rows[0]?.last_login_at;
+    await this.pool.query<User>(query, [USER_STATUS.UNVERIFIED]);
   }
 
   async getAllUsers(
@@ -98,7 +80,7 @@ class Database {
     const query = `
   SELECT id, first_name, last_name, email, job, status, created_at, last_login_at
   FROM users
-  ORDER BY ${safeSortColumn} ${safeSortOrder}`;
+  ORDER BY ${safeSortColumn} ${safeSortOrder} NULLS LAST`;
     const result = await this.pool.query<User>(query);
     return result.rows;
   }
@@ -119,6 +101,22 @@ class Database {
   WHERE email = $1`;
     const result = await this.pool.query<User>(query, [email]);
     return result.rows.length === 0 ? undefined : result.rows[0];
+  }
+
+  async unblockUsers(ids: string[]) {
+    const query = `
+  UPDATE users
+  SET status = CASE 
+    WHEN verification_token IS NOT NULL THEN $1::user_status
+    ELSE $2::user_status
+  END
+  WHERE id = ANY($3::uuid[]) AND status = $4::user_status`;
+    await this.pool.query(query, [
+      USER_STATUS.UNVERIFIED,
+      USER_STATUS.ACTIVE,
+      ids,
+      USER_STATUS.BLOCKED,
+    ]);
   }
 
   async updateLastLoginAt(id: string) {

@@ -1,31 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import { STATUS_CODES } from "@constants/statusCodes.js";
 import { usersService } from "@services/users.service.js";
-import { ValidationError } from "@errors/ValidationError.js";
 import { validateUserIds } from "validators/validateUserIds.js";
 
 class UsersController {
   private usersService = usersService;
 
-  getUsers = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      let { sortOrder, sortBy } = req.query;
-      sortOrder = typeof sortOrder === "string" ? sortOrder : "";
-      sortBy = typeof sortBy === "string" ? sortBy : "";
-      const users = await usersService.getUsers(sortBy, sortOrder);
-      res.status(STATUS_CODES.OK).json(users);
-    } catch (error) {
-      next(error);
-    }
-  };
-
   blockUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { userIds } = req.body ?? {};
       const typedUserIds = validateUserIds(userIds);
-      console.log(typedUserIds);
       await usersService.blockUsers(typedUserIds);
-      console.log(typedUserIds);
       res.status(STATUS_CODES.NO_CONTENT).send();
     } catch (error) {
       next(error);
@@ -51,6 +36,18 @@ class UsersController {
     try {
       await usersService.deleteUnverified();
       res.status(STATUS_CODES.NO_CONTENT).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      let { sortOrder, sortBy } = req.query;
+      sortOrder = typeof sortOrder === "string" ? sortOrder : undefined;
+      sortBy = typeof sortBy === "string" ? sortBy : undefined;
+      const users = await usersService.getUsers(sortBy, sortOrder);
+      res.status(STATUS_CODES.OK).json(users);
     } catch (error) {
       next(error);
     }
