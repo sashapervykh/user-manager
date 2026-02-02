@@ -32,6 +32,30 @@ class UsersController {
     }
   };
 
+  deleteUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { userIds } = req.body ?? {};
+      const typedUserIds = validateUserIds(userIds);
+      await usersService.deleteUsers(typedUserIds);
+      res.status(STATUS_CODES.NO_CONTENT).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteUnverified = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      await usersService.deleteUnverified();
+      res.status(STATUS_CODES.NO_CONTENT).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
   unblockUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { userIds } = req.body ?? {};

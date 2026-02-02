@@ -5,5 +5,7 @@ const usersRouter = Router();
 usersRouter.get("/", usersController.getUsers);
 usersRouter.get("/block", usersController.blockUsers);
 usersRouter.get("/unblock", usersController.unblockUsers);
+usersRouter.delete("/", usersController.deleteUsers);
+usersRouter.delete("/unverified", usersController.deleteUnverified);
 
 export default usersRouter;

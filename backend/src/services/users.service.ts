@@ -10,7 +10,14 @@ class UsersService {
 
   async blockUsers(userIds: string[]) {
     await this.database.blockUsers(userIds);
-    console.log("userIds");
+  }
+
+  async deleteUsers(userIds: string[]) {
+    await this.database.deleteUsers(userIds);
+  }
+
+  async deleteUnverified() {
+    await this.database.deleteUnverified();
   }
 
   async unblockUsers(userIds: string[]) {

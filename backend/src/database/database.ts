@@ -70,6 +70,21 @@ class Database {
     }
   }
 
+  async deleteUsers(ids: string[]) {
+    const query = `
+  DELETE FROM USERS
+  WHERE id = ANY($1::uuid[])`;
+    await this.pool.query<User>(query, [ids]);
+  }
+
+  async deleteUnverified() {
+    const query = `
+  DELETE FROM USERS
+  WHERE status = $1::user_status`;
+    const result = await this.pool.query<User>(query, [USER_STATUS.UNVERIFIED]);
+    return result.rows[0]?.last_login_at;
+  }
+
   async getAllUsers(
     sortBy = SORT_COLUMNS.LAST_LOGIN_AT,
     sortOrder = SORT_ORDER.DESC,
