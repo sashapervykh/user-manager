@@ -1,6 +1,7 @@
 import pool from "@config/db.js";
 import { SORT_COLUMNS } from "@constants/sortColumns.js";
 import { SORT_ORDER } from "@constants/sortOrder.js";
+import { USER_STATUS } from "@constants/userStatus.js";
 import { DuplicationError } from "@errors/DuplicationError.js";
 import { UserCreateDTO } from "@models/dtos/UserCreateDto.js";
 import { User } from "@models/entities/user.entity.js";
@@ -15,6 +16,23 @@ class Database {
   SET status='blocked' 
   WHERE id = ANY($1::uuid[])`;
     await this.pool.query(query, [ids]);
+  }
+
+  async unblockUsers(ids: string[]) {
+    console.log("start", ids);
+    const query = `
+  UPDATE users
+  SET status = CASE 
+    WHEN verification_token IS NOT NULL THEN $1::user_status
+    ELSE $2::user_status
+  END
+  WHERE id = ANY($3::uuid[]) AND status = $4::user_status`;
+    await this.pool.query(query, [
+      USER_STATUS.UNVERIFIED,
+      USER_STATUS.ACTIVE,
+      ids,
+      USER_STATUS.BLOCKED,
+    ]);
   }
 
   async createUser(user: UserCreateDTO) {

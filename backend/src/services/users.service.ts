@@ -10,6 +10,11 @@ class UsersService {
 
   async blockUsers(userIds: string[]) {
     await this.database.blockUsers(userIds);
+    console.log("userIds");
+  }
+
+  async unblockUsers(userIds: string[]) {
+    await this.database.unblockUsers(userIds);
   }
 }
 

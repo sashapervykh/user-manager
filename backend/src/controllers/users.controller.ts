@@ -23,8 +23,21 @@ class UsersController {
     try {
       const { userIds } = req.body ?? {};
       const typedUserIds = validateUserIds(userIds);
+      console.log(typedUserIds);
       await usersService.blockUsers(typedUserIds);
-      res.status(STATUS_CODES.NO_CONTENT);
+      console.log(typedUserIds);
+      res.status(STATUS_CODES.NO_CONTENT).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  unblockUsers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { userIds } = req.body ?? {};
+      const typedUserIds = validateUserIds(userIds);
+      await usersService.unblockUsers(typedUserIds);
+      res.status(STATUS_CODES.NO_CONTENT).send();
     } catch (error) {
       next(error);
     }

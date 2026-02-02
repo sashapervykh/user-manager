@@ -2,6 +2,7 @@ import { ERROR_MESSAGES } from "@constants/errorMessages.js";
 import { ValidationError } from "@errors/ValidationError.js";
 
 export function validateUserIds(data: unknown) {
+  console.log(data);
   if (!data) {
     throw new ValidationError(ERROR_MESSAGES.NO_USER_IDS_ERROR);
   }
