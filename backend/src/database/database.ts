@@ -9,6 +9,14 @@ import { DatabaseError } from "pg";
 class Database {
   private pool = pool;
 
+  async blockUsers(ids: string[]) {
+    const query = `
+  UPDATE users
+  SET status='blocked' 
+  WHERE id = ANY($1::uuid[])`;
+    await this.pool.query(query, [ids]);
+  }
+
   async createUser(user: UserCreateDTO) {
     try {
       const {

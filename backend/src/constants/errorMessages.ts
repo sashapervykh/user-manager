@@ -1,4 +1,6 @@
 export const ERROR_MESSAGES = {
+  NO_USER_IDS_ERROR: "User ids are required",
+  INVALID_USER_IDS_ERROR: "User ids has improper type",
   REGISTER_VALIDATION_ERROR:
     "Not all required fields are provided. First name, last name, email and password are required.",
   LOGIN_VALIDATION_ERROR:
