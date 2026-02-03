@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../node_modules/antd/es/typography/Title.js"],
+  "sourcesContent": ["\"use client\";\n\nimport * as React from 'react';\nimport { devUseWarning } from '../_util/warning';\nimport Base from './Base';\nconst TITLE_ELE_LIST = [1, 2, 3, 4, 5];\nconst Title = /*#__PURE__*/React.forwardRef((props, ref) => {\n  const {\n    level = 1,\n    children,\n    ...restProps\n  } = props;\n  if (process.env.NODE_ENV !== 'production') {\n    const warning = devUseWarning('Typography.Title');\n    process.env.NODE_ENV !== \"production\" ? warning(TITLE_ELE_LIST.includes(level), 'usage', 'Title only accept `1 | 2 | 3 | 4 | 5` as `level` value. And `5` need 4.6.0+ version.') : void 0;\n  }\n  const component = TITLE_ELE_LIST.includes(level) ? `h${level}` : `h1`;\n  return /*#__PURE__*/React.createElement(Base, {\n    ref: ref,\n    ...restProps,\n    component: component\n  }, children);\n});\nexport default Title;"],
+  "mappings": ";;;;;;;;;;;;AAEA,YAAuB;AAGvB,IAAM,iBAAiB,CAAC,GAAG,GAAG,GAAG,GAAG,CAAC;AACrC,IAAM,QAA2B,iBAAW,CAAC,OAAO,QAAQ;AAC1D,QAAM;AAAA,IACJ,QAAQ;AAAA,IACR;AAAA,IACA,GAAG;AAAA,EACL,IAAI;AACJ,MAAI,MAAuC;AACzC,UAAM,UAAU,cAAc,kBAAkB;AAChD,WAAwC,QAAQ,eAAe,SAAS,KAAK,GAAG,SAAS,sFAAsF,IAAI;AAAA,EACrL;AACA,QAAM,YAAY,eAAe,SAAS,KAAK,IAAI,IAAI,KAAK,KAAK;AACjE,SAA0B,oBAAc,cAAM;AAAA,IAC5C;AAAA,IACA,GAAG;AAAA,IACH;AAAA,EACF,GAAG,QAAQ;AACb,CAAC;AACD,IAAO,gBAAQ;",
+  "names": []
+}
