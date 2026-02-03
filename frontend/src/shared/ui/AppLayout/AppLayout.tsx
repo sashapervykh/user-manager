@@ -7,7 +7,9 @@ export function AppLayout() {
   return (
     <Layout className="container-fluid min-vh-100 d-flex bg-white">
       <AppHeader />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <AppFooter />
     </Layout>
   );
