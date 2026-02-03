@@ -3,3 +3,7 @@
   margin-right: auto;
   margin-left: auto;
 }
+
+.ant-form-item-label > label {
+  font-size: 1.25rem !important;
+}

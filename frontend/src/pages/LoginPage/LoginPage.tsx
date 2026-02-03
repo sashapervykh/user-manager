@@ -1,5 +1,10 @@
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
+import Card from "antd/es/card/Card";
+import Typography from "antd/es/typography";
+import Link from "antd/es/typography/Link";
+
+const { Title, Text } = Typography;
 
 type FieldType = {
   email?: string;
@@ -17,45 +22,60 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 
 export function LoginPage() {
   return (
-    <Form
-      initialValues={{ remember: false }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Form.Item<FieldType>
-        label="Email"
-        name="email"
-        rules={[{ required: true, message: "Please input your username!" }]}
-      >
-        <Input />
-      </Form.Item>
+    <>
+      <Card className="d-flex m-auto p-5">
+        <Title className="mb-5">Start Your Journey</Title>
+        <Form
+          initialValues={{ remember: false }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+          className="fs-5"
+          layout="vertical"
+        >
+          <Form.Item<FieldType>
+            label="Email:"
+            name="email"
+            rules={[{ required: true, message: "Please input your username!" }]}
+          >
+            <Input size="large" />
+          </Form.Item>
 
-      <Form.Item<FieldType>
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
-      >
-        <Input.Password />
-      </Form.Item>
+          <Form.Item<FieldType>
+            label="Password:"
+            name="password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+          >
+            <Input.Password size="large" />
+          </Form.Item>
 
-      <Form.Item<FieldType>
-        name="remember"
-        valuePropName="checked"
-        label={null}
-      >
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
+          <Form.Item<FieldType>
+            name="remember"
+            valuePropName="checked"
+            label={null}
+          >
+            <Checkbox className="fs-5">Remember me</Checkbox>
+          </Form.Item>
 
-      <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
+          <Form.Item label={null}>
+            <Button
+              className="fs-5 w-100"
+              type="primary"
+              htmlType="submit"
+              size="large"
+            >
+              Sign In
+            </Button>
+          </Form.Item>
 
-      <p>
-        Don't have a registrtion yet? <b>Sign in</b>{" "}
-      </p>
-    </Form>
+          <Text className="fs-6">
+            Haven't registered yet?{" "}
+            <Link href="register" className="fs-6">
+              Sign Up
+            </Link>{" "}
+          </Text>
+        </Form>
+      </Card>
+    </>
   );
 }
