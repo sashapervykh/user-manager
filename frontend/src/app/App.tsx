@@ -1,9 +1,9 @@
-import "./App.css";
+import { AppRouter } from "./router/router";
 
 function App() {
   return (
     <>
-      <h1>User Manager App</h1>
+      <AppRouter />
     </>
   );
 }
