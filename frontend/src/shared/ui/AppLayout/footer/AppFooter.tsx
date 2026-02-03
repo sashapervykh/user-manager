@@ -7,7 +7,7 @@ const { Text } = Typography;
 export function AppFooter() {
   return (
     <Footer className="d-flex border-top mt-auto bg-white justify-content-center align-items-center">
-      <Text className="w-auto fs-5">
+      <Text className="w-auto fs-5 text-center">
         Made by{" "}
         <Link
           className="fs-5"
