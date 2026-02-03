@@ -1,4 +1,4 @@
-import { Button, Layout } from "antd";
+import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import { AppHeader } from "./header/AppHeader";
 import { AppFooter } from "./footer/AppFooter";

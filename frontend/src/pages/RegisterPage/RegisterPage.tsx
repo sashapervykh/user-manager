@@ -2,9 +2,11 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import Card from "antd/es/card/Card";
 import Typography from "antd/es/typography";
-import Link from "antd/es/typography/Link";
+import { AuthHint } from "../../shared/ui/AuthHint/AuthHint";
+import { ROUTES } from "../../shared/config/routes";
+import { AUTH_ACTIONS_TEXT } from "../../shared/const/authActionsText";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 type FieldType = {
   firstName?: string;
@@ -27,7 +29,7 @@ export function RegisterPage() {
   return (
     <>
       <Card className="d-flex m-auto ps-5 pe-5">
-        <Title className="mb-5">Join Your Colleagues</Title>
+        <Title className="mb-3">Join Your Colleagues</Title>
         <Form
           initialValues={{ remember: false }}
           onFinish={onFinish}
@@ -94,12 +96,11 @@ export function RegisterPage() {
               Sign Up
             </Button>
           </Form.Item>
-          <Text className="fs-6">
-            Have registered already?{" "}
-            <Link href="/login" className="fs-6">
-              Sign In
-            </Link>{" "}
-          </Text>
+          <AuthHint
+            question="Have registered already?"
+            href={ROUTES.LOGIN}
+            action={AUTH_ACTIONS_TEXT.SIGN_IN}
+          />
         </Form>
       </Card>
     </>
