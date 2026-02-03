@@ -1,0 +1,13 @@
+#root {
+  max-width: 1440px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ant-form-item-label > label {
+  font-size: 1.25rem !important;
+}
+
+.h-3rem {
+  height: 3rem;
+}
