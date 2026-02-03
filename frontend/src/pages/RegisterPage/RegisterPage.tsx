@@ -39,28 +39,32 @@ export function RegisterPage() {
           <Form.Item<FieldType>
             label="First name:"
             name="firstName"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[
+              { required: true, message: "Please input your first name!" },
+            ]}
           >
             <Input size="large" />
           </Form.Item>
           <Form.Item<FieldType>
             label="Last name:"
             name="lastName"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[
+              { required: true, message: "Please input your second name!" },
+            ]}
           >
             <Input size="large" />
           </Form.Item>
           <Form.Item<FieldType>
             label="Job:"
             name="job"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ message: "Please input your job!" }]}
           >
             <Input size="large" />
           </Form.Item>
           <Form.Item<FieldType>
             label="Email:"
             name="email"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input size="large" />
           </Form.Item>
@@ -74,7 +78,9 @@ export function RegisterPage() {
           <Form.Item<FieldType>
             label="Confrim password:"
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[
+              { required: true, message: "Please confirm your password!" },
+            ]}
           >
             <Input.Password size="large" />
           </Form.Item>
@@ -85,7 +91,7 @@ export function RegisterPage() {
               htmlType="submit"
               size="large"
             >
-              Sign In
+              Sign Up
             </Button>
           </Form.Item>
           <Text className="fs-6">
