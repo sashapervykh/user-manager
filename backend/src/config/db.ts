@@ -15,7 +15,7 @@ try {
   console.log("Database connected successfully");
   client.release();
 } catch {
-  console.error("Database connection failed successfully");
+  console.error("Database connection failed");
 }
 
 export default pool;
