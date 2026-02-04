@@ -1,5 +1,6 @@
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
+import { getUsers } from "../../../shared/api/api";
 
 type FieldType = {
   email?: string;
@@ -7,7 +8,10 @@ type FieldType = {
   remember?: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+  const response = await getUsers();
+  const users = await response.json();
+  console.log(users);
   console.log("Success:", values);
 };
 
