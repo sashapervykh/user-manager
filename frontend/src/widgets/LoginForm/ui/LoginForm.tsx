@@ -1,14 +1,10 @@
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input } from "antd";
+import { useAuth } from "../../../features/auth/models/hooks/useAuth";
 
 type FieldType = {
-  email?: string;
-  password?: string;
-  remember?: string;
-};
-
-const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-  console.log("Success:", values);
+  email: string;
+  password: string;
 };
 
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
@@ -16,6 +12,11 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 };
 
 export function LoginForm() {
+  const { login } = useAuth();
+
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    login(values);
+  };
   return (
     <>
       {" "}
@@ -45,14 +46,6 @@ export function LoginForm() {
           rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password size="large" />
-        </Form.Item>
-
-        <Form.Item<FieldType>
-          name="remember"
-          valuePropName="checked"
-          label={null}
-        >
-          <Checkbox className="fs-5">Remember me</Checkbox>
         </Form.Item>
 
         <Form.Item label={null}>

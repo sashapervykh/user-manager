@@ -1,6 +1,6 @@
 import { Button, Form, Input } from "antd";
 import type { FormProps } from "antd";
-import { comparePasswords } from "../LoginForm/models/comparePasswords";
+import { comparePasswords } from "./models/comparePasswords";
 import { useAuth } from "../../features/auth/models/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../shared/config/routes";

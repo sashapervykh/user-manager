@@ -5,6 +5,7 @@ import type { UserResponseDto } from "../types/userResponseDto";
 import { TOKEN_STORAGE } from "../../../../shared/lib/tokenStorage";
 import type { UserRegisterDto } from "../types/userRegisterDro";
 import type { User } from "../../../../entities/user/model/types/user";
+import type { UserCreateDto } from "../types/userCreateDto";
 
 export function useAuth() {
   const { setUser } = useUser();
@@ -19,7 +20,9 @@ export function useAuth() {
       return;
     }
     try {
-      const user = await apiClient.post<User>("/users/me", { token });
+      const { user } = await apiClient.post<{ user: User }>("/users/me", {
+        token,
+      });
       setUser(user);
     } catch (error) {
       console.log(error);
@@ -45,6 +48,21 @@ export function useAuth() {
     }
   };
 
+  const login = async (userCreateDto: UserCreateDto) => {
+    try {
+      setError(null);
+      setIsLoading(true);
+      const { user, token } = await apiClient.post<UserResponseDto>(
+        "/auth/login",
+        userCreateDto,
+      );
+      TOKEN_STORAGE.set(token);
+      setUser(user);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   const logout = () => {
     TOKEN_STORAGE.remove();
     setUser(null);
@@ -58,5 +76,6 @@ export function useAuth() {
     setIsLoading,
     checkAuth,
     logout,
+    login,
   };
 }
