@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { Button } from "antd";
 import { AddressLink } from "../../../../shared/ui/AddressLink/AddressLink";
 import { AUTH_ACTIONS_TEXT } from "../../../../shared/const/authActionsText";
 import { ROUTES } from "../../../../shared/config/routes";
@@ -12,7 +11,7 @@ interface Props {
 export function AuthHeaderActions({ isAuthorized }: Props) {
   const { pathname } = useLocation();
   if (isAuthorized) return <LogoutButton />;
-  if (pathname === "/login")
+  if (pathname === ROUTES.LOGIN)
     return (
       <AddressLink text={AUTH_ACTIONS_TEXT.SIGN_UP} address={ROUTES.REGISTER} />
     );
