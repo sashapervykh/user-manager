@@ -7,7 +7,7 @@ import type { UserRegisterDto } from "../types/userRegisterDro";
 import type { User } from "../../../../entities/user/model/types/user";
 import type { UserCreateDto } from "../types/userCreateDto";
 import { API_ROUTES } from "../../../../shared/api/apiRoutes";
-import { showNotification } from "../../../../shared/ui/showNotification/shoNotification";
+import { showNotification } from "../../../../shared/ui/showNotification/showNotification";
 import { getErrorMessage } from "../../../../shared/lib/getErrorMessage";
 
 export function useAuth() {

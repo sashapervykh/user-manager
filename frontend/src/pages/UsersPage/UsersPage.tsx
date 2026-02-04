@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import Title from "antd/es/typography/Title";
@@ -9,16 +9,10 @@ import {
   UnlockOutlined,
 } from "@ant-design/icons";
 import { useUser } from "../../entities/user/model/useUser";
+import { useUsersList } from "../../features/users/model/useUsersList";
+import type { TableUser } from "../../features/users/model/types/TableUser";
 
-interface DataType {
-  key: React.Key;
-  name: string;
-  job: string;
-  email: string;
-  lastSeenAt: string;
-}
-
-const columns: TableColumnsType<DataType> = [
+const columns: TableColumnsType<TableUser> = [
   {
     title: "Name",
     dataIndex: "name",
@@ -37,38 +31,7 @@ const columns: TableColumnsType<DataType> = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    job: "developer",
-    email: "aa@aa.aa",
-    lastSeenAt: new Date().toLocaleString(),
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    job: "doctor",
-    email: "bb@bb.bb",
-    lastSeenAt: new Date().toLocaleString(),
-  },
-  {
-    key: "3",
-    name: "Kat Fane",
-    job: "policemen",
-    email: "cc@cc.cc",
-    lastSeenAt: new Date().toLocaleString(),
-  },
-  {
-    key: "4",
-    name: "Karen Miles",
-    job: "lawyer",
-    email: "dd@dd.dd",
-    lastSeenAt: new Date().toLocaleString(),
-  },
-];
-
-const rowSelection: TableProps<DataType>["rowSelection"] = {
+const rowSelection: TableProps<TableUser>["rowSelection"] = {
   onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
     console.log(
       `selectedRowKeys: ${selectedRowKeys}`,
@@ -80,9 +43,15 @@ const rowSelection: TableProps<DataType>["rowSelection"] = {
 
 export function UsersPage() {
   const { user } = useUser();
+  const { users, getUsers } = useUsersList();
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <>
-      <div className="d-flex flex-column w-100 h-100 justify-content-center">
+      <div className="d-flex flex-column w-100 h-100">
         <Title className="text-center mt-0 mb-2">
           Hello, {user?.firstName}!
         </Title>
@@ -104,10 +73,10 @@ export function UsersPage() {
           </Button>
         </div>
         <div>
-          <Table<DataType>
+          <Table<TableUser>
             rowSelection={{ type: "checkbox", ...rowSelection }}
             columns={columns}
-            dataSource={data}
+            dataSource={users}
             size="large"
           />
         </div>

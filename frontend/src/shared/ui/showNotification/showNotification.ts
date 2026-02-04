@@ -9,7 +9,7 @@ export interface Props {
 export function showNotification({ type, title, description }: Props) {
   return notification.open({
     type: type ?? "success",
-    message: title,
+    title: title,
     description: description,
     onClick: () => {
       console.log("Notification Clicked!");
