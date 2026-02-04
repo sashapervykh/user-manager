@@ -8,6 +8,7 @@ import {
   LockOutlined,
   UnlockOutlined,
 } from "@ant-design/icons";
+import { useUser } from "../../entities/user/model/useUser";
 
 interface DataType {
   key: React.Key;
@@ -78,11 +79,13 @@ const rowSelection: TableProps<DataType>["rowSelection"] = {
 };
 
 export function UsersPage() {
-  const firstName = "John";
+  const { user } = useUser();
   return (
     <>
       <div className="d-flex flex-column w-100 h-100 justify-content-center">
-        <Title className="text-center mt-0 mb-2">Hello, {firstName}!</Title>
+        <Title className="text-center mt-0 mb-2">
+          Hello, {user?.firstName}!
+        </Title>
         <Title className="text-center mt-0 mb-4" level={2}>
           Let's manage some users!
         </Title>

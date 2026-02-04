@@ -2,6 +2,9 @@ import { Button, Form, Input } from "antd";
 import type { FormProps } from "antd";
 import { comparePasswords } from "../LoginForm/models/comparePasswords";
 import { apiClient } from "../../shared/api/apiClient";
+import { useAuth } from "../../features/auth/models/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../shared/config/routes";
 
 type FieldType = {
   firstName: string;
@@ -12,18 +15,19 @@ type FieldType = {
   confirmation: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
-  console.log("new");
-  const response = await apiClient.post("/auth/register", values);
-  console.log("new");
-  console.log(response);
-};
-
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
 export function RegisterForm() {
+  const { error, isSubmitting, register } = useAuth();
+  const navigate = useNavigate();
+
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    await register(values);
+    navigate(ROUTES.USERS);
+  };
+
   return (
     <>
       <Form
@@ -90,6 +94,7 @@ export function RegisterForm() {
             type="primary"
             htmlType="submit"
             size="large"
+            disabled={isSubmitting ? true : false}
           >
             Sign Up
           </Button>
