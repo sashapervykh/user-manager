@@ -4,5 +4,6 @@ import { ROUTES } from "../../../../shared/config/routes";
 
 export function PublicOnlyRoute() {
   const { user } = useUser();
-  return user ? <Outlet /> : <Navigate to={ROUTES.USERS} replace />;
+
+  return user ? <Navigate to={ROUTES.USERS} replace /> : <Outlet />;
 }

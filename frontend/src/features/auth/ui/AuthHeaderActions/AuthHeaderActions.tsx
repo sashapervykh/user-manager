@@ -1,12 +1,15 @@
 import { useLocation } from "react-router-dom";
 import { Button } from "antd";
-import { AddressLink } from "../../AddressLink/AddressLink";
-import { AUTH_ACTIONS_TEXT } from "../../../const/authActionsText";
-import { ROUTES } from "../../../config/routes";
+import { AddressLink } from "../../../../shared/ui/AddressLink/AddressLink";
+import { AUTH_ACTIONS_TEXT } from "../../../../shared/const/authActionsText";
+import { ROUTES } from "../../../../shared/config/routes";
 
-export function HeaderActions() {
+interface Props {
+  isAuthorized: boolean;
+}
+
+export function AuthHeaderActions({ isAuthorized }: Props) {
   const { pathname } = useLocation();
-  const isAuthorized = false;
   if (isAuthorized)
     return (
       <Button type="link" className="fs-5">

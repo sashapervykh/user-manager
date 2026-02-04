@@ -32,6 +32,13 @@ class ApiClient {
       body: JSON.stringify(data),
     });
   }
+
+  get<T>(endpoint: string, data?: unknown) {
+    return this.request<T>(endpoint, {
+      method: "GET",
+      body: JSON.stringify(data),
+    });
+  }
 }
 
 export const apiClient = new ApiClient();
