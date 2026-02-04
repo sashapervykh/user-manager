@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Button, Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Table, Tooltip } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import Title from "antd/es/typography/Title";
 import {
@@ -26,24 +26,25 @@ const columns: TableColumnsType<TableUser> = [
     dataIndex: "email",
   },
   {
+    title: "Status",
+    dataIndex: "status",
+  },
+  {
     title: "Last Seen",
     dataIndex: "lastLoginAt",
   },
 ];
 
-const rowSelection: TableProps<TableUser>["rowSelection"] = {
-  onChange: (selectedRowKeys: React.Key[], selectedRows: TableUser[]) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows,
-    );
-  },
-};
-
 export function UsersPage() {
   const { user } = useUser();
-  const { users, getUsers } = useUsersList();
+  const { users, getUsers, blockUsers } = useUsersList();
+  const [chosenUsers, setChosenUsers] = useState<React.Key[]>([]);
+
+  const rowSelection: TableProps<TableUser>["rowSelection"] = {
+    onChange: (selectedRowKeys: React.Key[]) => {
+      setChosenUsers(selectedRowKeys);
+    },
+  };
 
   useEffect(() => {
     getUsers();
@@ -59,18 +60,33 @@ export function UsersPage() {
           Let's manage some users!
         </Title>
         <div className="d-flex gap-1 h-3rem ms-auto me-0 mb-3">
-          <Button className="h-100" type="primary" size="large">
-            Block <LockOutlined />
-          </Button>
-          <Button className="h-100" type="primary" size="large">
-            <UnlockOutlined />
-          </Button>
-          <Button className="h-100" type="primary" size="large">
-            <DeleteOutlined />
-          </Button>
-          <Button className="h-100" type="primary" size="large">
-            <ClearOutlined />
-          </Button>
+          <Tooltip placement="topLeft" title="Block selected">
+            <Button
+              className="h-100"
+              type="primary"
+              size="large"
+              onClick={() => {
+                blockUsers(chosenUsers);
+              }}
+            >
+              Block <LockOutlined />
+            </Button>
+          </Tooltip>
+          <Tooltip placement="topLeft" title="Unblock selected">
+            <Button className="h-100" type="primary" size="large">
+              <UnlockOutlined />
+            </Button>
+          </Tooltip>
+          <Tooltip placement="topLeft" title="Delete selected">
+            <Button className="h-100" type="primary" size="large">
+              <DeleteOutlined />
+            </Button>
+          </Tooltip>
+          <Tooltip placement="topLeft" title="Delete all unverified">
+            <Button className="h-100" type="primary" size="large">
+              <ClearOutlined />
+            </Button>
+          </Tooltip>
         </div>
         <div>
           <Table<TableUser>

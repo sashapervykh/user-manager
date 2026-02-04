@@ -33,6 +33,13 @@ class ApiClient {
     });
   }
 
+  put<T>(endpoint: string, data?: unknown) {
+    return this.request<T>(endpoint, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+  }
+
   get<T>(endpoint: string) {
     return this.request<T>(endpoint, {
       method: "GET",

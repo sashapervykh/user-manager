@@ -49,5 +49,22 @@ export function useUsersList() {
     }
   };
 
-  return { users, getUsers, isLoading, setIsLoading };
+  const blockUsers = async (users: React.Key[]) => {
+    try {
+      setIsLoading(true);
+      await apiClient.put(API_ROUTES.USERS.BLOCK, { userIds: users });
+      await getUsers();
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showNotification({
+        type: "error",
+        title: "Getting users failed",
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { users, getUsers, isLoading, setIsLoading, blockUsers };
 }
