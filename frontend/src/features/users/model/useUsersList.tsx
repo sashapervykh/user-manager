@@ -31,7 +31,9 @@ export function useUsersList() {
           status,
           job: job ?? "N/A",
           email,
-          lastLoginAt: new Date(lastLoginAt ?? "").toLocaleString(),
+          lastLoginAt: lastLoginAt
+            ? new Date(lastLoginAt).toLocaleString()
+            : "-",
         };
       });
       setUsers(tableUsers);

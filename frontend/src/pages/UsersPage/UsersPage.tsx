@@ -27,12 +27,12 @@ const columns: TableColumnsType<TableUser> = [
   },
   {
     title: "Last Seen",
-    dataIndex: "lastSeenAt",
+    dataIndex: "lastLoginAt",
   },
 ];
 
 const rowSelection: TableProps<TableUser>["rowSelection"] = {
-  onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+  onChange: (selectedRowKeys: React.Key[], selectedRows: TableUser[]) => {
     console.log(
       `selectedRowKeys: ${selectedRowKeys}`,
       "selectedRows: ",
