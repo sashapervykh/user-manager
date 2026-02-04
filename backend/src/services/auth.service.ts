@@ -14,11 +14,18 @@ class AuthService {
   private database = database;
 
   async register(registerUserDto: UserRegisterDto) {
-    const { password, ...userData } = registerUserDto;
+    const {
+      password,
+      email,
+      firstName: first_name,
+      lastName: last_name,
+    } = registerUserDto;
     const password_hash = await this.getPasswordHash(password);
     const verification_token = this.getEmailToken();
     return await this.database.createUser({
-      ...userData,
+      first_name,
+      last_name,
+      email,
       status: USER_STATUS.UNVERIFIED,
       password_hash,
       verification_token,

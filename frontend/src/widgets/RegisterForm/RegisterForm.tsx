@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import type { FormProps } from "antd";
 import { comparePasswords } from "../LoginForm/models/comparePasswords";
+import { apiClient } from "../../shared/api/apiClient";
 
 type FieldType = {
   firstName: string;
@@ -11,8 +12,11 @@ type FieldType = {
   confirmation: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
+const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+  console.log("new");
+  const response = await apiClient.post("/auth/register", values);
+  console.log("new");
+  console.log(response);
 };
 
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {

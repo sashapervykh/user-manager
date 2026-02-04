@@ -15,7 +15,12 @@ class AuthController {
     next: NextFunction,
   ) => {
     try {
-      const { email, password, first_name, last_name } = req.body ?? {};
+      const {
+        email,
+        password,
+        firstName: first_name,
+        lastName: last_name,
+      } = req.body ?? {};
       if (!email || !password || !first_name || !last_name) {
         throw new ValidationError(ERROR_MESSAGES.REGISTER_VALIDATION_ERROR);
       }
