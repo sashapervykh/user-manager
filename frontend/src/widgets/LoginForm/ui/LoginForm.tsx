@@ -1,5 +1,5 @@
 import type { FormProps } from "antd";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { useAuth } from "../../../features/auth/models/hooks/useAuth";
 
 type FieldType = {

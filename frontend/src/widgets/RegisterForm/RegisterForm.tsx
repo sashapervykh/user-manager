@@ -20,11 +20,9 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 
 export function RegisterForm() {
   const { isLoading, register } = useAuth();
-  const navigate = useNavigate();
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     await register(values);
-    navigate(ROUTES.USERS);
   };
 
   return (

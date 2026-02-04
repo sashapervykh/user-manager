@@ -7,6 +7,8 @@ import type { UserRegisterDto } from "../types/userRegisterDro";
 import type { User } from "../../../../entities/user/model/types/user";
 import type { UserCreateDto } from "../types/userCreateDto";
 import { API_ROUTES } from "../../../../shared/api/apiRoutes";
+import { showNotification } from "../../../../shared/ui/showNotification/shoNotification";
+import { getErrorMessage } from "../../../../shared/lib/getErrorMessage";
 
 export function useAuth() {
   const { setUser } = useUser();
@@ -44,10 +46,29 @@ export function useAuth() {
         API_ROUTES.AUTH.REGISTER,
         userRegisterDto,
       );
-      console.log(user, token);
       TOKEN_STORAGE.set(token);
       setUser(user);
+      showNotification({
+        title: "Successful registration",
+        description: "Welcome! We are glad you join us!",
+      });
+      let timeout = setTimeout(() => {
+        showNotification({
+          type: "warning",
+          title: "Email confirmation required",
+          description:
+            "You need to confirm your email. Click the link from the letter sent to your email.",
+        });
+        clearTimeout(timeout);
+      }, 1000);
     } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showNotification({
+        type: "error",
+        title: "Registration failed",
+        description: errorMessage,
+      });
+      setIsLoading(false);
       setError(error);
     }
   };
@@ -62,7 +83,17 @@ export function useAuth() {
       );
       TOKEN_STORAGE.set(token);
       setUser(user);
+      showNotification({
+        title: "Successful authentication",
+        description: `Welcome back! We missed you!`,
+      });
     } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showNotification({
+        type: "error",
+        title: "Authentication failed",
+        description: errorMessage,
+      });
       setError(error);
     }
   };
