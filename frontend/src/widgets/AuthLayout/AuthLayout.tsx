@@ -4,12 +4,10 @@ import { AppLayout } from "../../shared/ui/AppLayout/AppLayout";
 import { useUser } from "../../entities/user/model/useUser";
 import { AuthHeaderActions } from "../../features/auth/ui/AuthHeaderActions/AuthHeaderActions";
 import { Spin } from "antd";
-import { notification } from "antd";
 
 export function AuthLayout() {
   const { checkAuth, isLoading } = useAuth();
   const { user } = useUser();
-  const [_, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     checkAuth();

@@ -52,7 +52,7 @@ export function useAuth() {
         title: "Successful registration",
         description: "Welcome! We are glad you join us!",
       });
-      let timeout = setTimeout(() => {
+      const timeout = setTimeout(() => {
         showNotification({
           type: "warning",
           title: "Email confirmation required",
