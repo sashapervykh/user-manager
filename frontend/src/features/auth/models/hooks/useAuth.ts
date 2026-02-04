@@ -45,6 +45,11 @@ export function useAuth() {
     }
   };
 
+  const logout = () => {
+    TOKEN_STORAGE.remove();
+    setUser(null);
+  };
+
   return {
     register,
     isLoading,
@@ -52,5 +57,6 @@ export function useAuth() {
     setError,
     setIsLoading,
     checkAuth,
+    logout,
   };
 }

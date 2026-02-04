@@ -3,6 +3,7 @@ import { Button } from "antd";
 import { AddressLink } from "../../../../shared/ui/AddressLink/AddressLink";
 import { AUTH_ACTIONS_TEXT } from "../../../../shared/const/authActionsText";
 import { ROUTES } from "../../../../shared/config/routes";
+import { LogoutButton } from "./LogoutButton";
 
 interface Props {
   isAuthorized: boolean;
@@ -10,12 +11,7 @@ interface Props {
 
 export function AuthHeaderActions({ isAuthorized }: Props) {
   const { pathname } = useLocation();
-  if (isAuthorized)
-    return (
-      <Button type="link" className="fs-5">
-        {AUTH_ACTIONS_TEXT.LOG_OUT}
-      </Button>
-    );
+  if (isAuthorized) return <LogoutButton />;
   if (pathname === "/login")
     return (
       <AddressLink text={AUTH_ACTIONS_TEXT.SIGN_UP} address={ROUTES.REGISTER} />
