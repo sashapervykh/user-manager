@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useUser } from "../../../../entities/user/model/useUser";
 import { apiClient } from "../../../../shared/api/apiClient";
 import type { UserResponseDto } from "../types/userResponseDto";
@@ -11,7 +11,7 @@ export function useAuth() {
   const [error, setError] = useState<unknown | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     setIsLoading(true);
     const token = TOKEN_STORAGE.get();
     if (!token) {
@@ -19,14 +19,15 @@ export function useAuth() {
       return;
     }
     try {
-      const user = await apiClient.get<User>("users/me", { token });
+      const user = await apiClient.post<User>("/users/me", { token });
       setUser(user);
-    } catch {
+    } catch (error) {
+      console.log(error);
       TOKEN_STORAGE.remove();
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [setUser]);
 
   const register = async (userRegisterDto: UserRegisterDto) => {
     try {
@@ -37,8 +38,8 @@ export function useAuth() {
         userRegisterDto,
       );
       console.log(user, token);
-      setUser(user);
       TOKEN_STORAGE.set(token);
+      setUser(user);
     } catch (error) {
       setError(error);
     }
