@@ -12,10 +12,6 @@ type FieldType = {
   confirmation: string;
 };
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
 export function RegisterForm() {
   const { isLoading, register } = useAuth();
 
@@ -28,7 +24,6 @@ export function RegisterForm() {
       <Form
         initialValues={{ remember: false }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
         className="fs-5"
         layout="vertical"

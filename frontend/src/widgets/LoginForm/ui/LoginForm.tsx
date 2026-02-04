@@ -7,10 +7,6 @@ type FieldType = {
   password: string;
 };
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
 export function LoginForm() {
   const { login } = useAuth();
 
@@ -23,7 +19,6 @@ export function LoginForm() {
       <Form
         initialValues={{ remember: false }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
         className="fs-5"
         layout="vertical"
