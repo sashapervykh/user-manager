@@ -9,7 +9,6 @@ import { API_ROUTES } from "../../../shared/api/apiRoutes";
 import { apiClient } from "../../../shared/api/apiClient";
 import { castTableUsers } from "../lib/castTableUser";
 import { shouldRedirect } from "../lib/shouldRedirect";
-import { useNavigate } from "react-router-dom";
 import { TOKEN_STORAGE } from "../../../shared/lib/tokenStorage";
 import { useUser } from "../../../entities/user/model/useUser";
 
