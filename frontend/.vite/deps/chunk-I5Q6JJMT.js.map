@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../node_modules/antd/es/typography/Link.js"],
+  "sourcesContent": ["\"use client\";\n\nimport * as React from 'react';\nimport { devUseWarning } from '../_util/warning';\nimport Base from './Base';\nconst Link = /*#__PURE__*/React.forwardRef((props, ref) => {\n  const {\n    ellipsis,\n    rel,\n    children,\n    // @ts-expect-error: https://github.com/ant-design/ant-design/issues/26622\n    navigate: _navigate,\n    ...restProps\n  } = props;\n  if (process.env.NODE_ENV !== 'production') {\n    const warning = devUseWarning('Typography.Link');\n    process.env.NODE_ENV !== \"production\" ? warning(typeof ellipsis !== 'object', 'usage', '`ellipsis` only supports boolean value.') : void 0;\n  }\n  const mergedProps = {\n    ...restProps,\n    rel: rel === undefined && restProps.target === '_blank' ? 'noopener noreferrer' : rel\n  };\n  return /*#__PURE__*/React.createElement(Base, {\n    ...mergedProps,\n    ref: ref,\n    ellipsis: !!ellipsis,\n    component: \"a\"\n  }, children);\n});\nexport default Link;"],
+  "mappings": ";;;;;;;;;;;;AAEA,YAAuB;AAGvB,IAAM,OAA0B,iBAAW,CAAC,OAAO,QAAQ;AACzD,QAAM;AAAA,IACJ;AAAA,IACA;AAAA,IACA;AAAA;AAAA,IAEA,UAAU;AAAA,IACV,GAAG;AAAA,EACL,IAAI;AACJ,MAAI,MAAuC;AACzC,UAAM,UAAU,cAAc,iBAAiB;AAC/C,WAAwC,QAAQ,OAAO,aAAa,UAAU,SAAS,yCAAyC,IAAI;AAAA,EACtI;AACA,QAAM,cAAc;AAAA,IAClB,GAAG;AAAA,IACH,KAAK,QAAQ,UAAa,UAAU,WAAW,WAAW,wBAAwB;AAAA,EACpF;AACA,SAA0B,oBAAc,cAAM;AAAA,IAC5C,GAAG;AAAA,IACH;AAAA,IACA,UAAU,CAAC,CAAC;AAAA,IACZ,WAAW;AAAA,EACb,GAAG,QAAQ;AACb,CAAC;AACD,IAAO,eAAQ;",
+  "names": []
+}

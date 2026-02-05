@@ -1,0 +1,21 @@
+# Node
+node_modules/
+backend/node_modules/
+backend/dist/
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# Environment
+.env
+*.env
+
+# Database
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# OS
+.DS_Store
