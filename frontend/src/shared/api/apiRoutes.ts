@@ -1,4 +1,9 @@
 export const API_ROUTES = {
   AUTH: { LOGIN: "/auth/login", REGISTER: "/auth/register" },
-  USERS: { ME: "/users/me", MAIN: "/users/", BLOCK: "/users/block" },
+  USERS: {
+    MAIN: "/users/",
+    ME: `/users/me`,
+    BLOCK: "/users/block",
+    UNBLOCK: "/users/unblock",
+  },
 };

@@ -61,6 +61,25 @@ export function UsersListProvider({ children }: Props) {
       setIsLoading(true);
       await apiClient.put(API_ROUTES.USERS.BLOCK, { userIds: selectedUsers });
       await getUsers();
+      setSelectedUsers([]);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showNotification({
+        type: "error",
+        title: "Blocking users failed",
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const unblockUsers = async () => {
+    try {
+      setIsLoading(true);
+      await apiClient.put(API_ROUTES.USERS.UNBLOCK, { userIds: selectedUsers });
+      await getUsers();
+      setSelectedUsers([]);
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       showNotification({
@@ -78,6 +97,7 @@ export function UsersListProvider({ children }: Props) {
     setSelectedUsers,
     blockUsers,
     getUsers,
+    unblockUsers,
     users,
     isLoading,
   };

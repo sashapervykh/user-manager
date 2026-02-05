@@ -23,6 +23,11 @@ class ApiClient {
       const message = data.message;
       throw new Error(message);
     }
+
+    if (response.status === 204) {
+      return {} as T;
+    }
+
     return response.json();
   }
 

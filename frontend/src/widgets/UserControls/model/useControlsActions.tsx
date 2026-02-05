@@ -19,7 +19,7 @@ interface ControlsAction {
 }
 
 export const useControlsActions = () => {
-  const { blockUsers } = useUsersList();
+  const { blockUsers, unblockUsers } = useUsersList();
   const controlsActions: ControlsAction[] = [
     {
       type: USER_CONTROLS_TYPES.BLOCK,
@@ -35,7 +35,7 @@ export const useControlsActions = () => {
       type: USER_CONTROLS_TYPES.UNBLOCK,
       tooltip: "Unblock selected",
       buttonContent: <UnlockOutlined />,
-      handleClick: blockUsers,
+      handleClick: unblockUsers,
     },
     {
       type: USER_CONTROLS_TYPES.DELETE,

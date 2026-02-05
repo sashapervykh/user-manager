@@ -5,8 +5,9 @@ import { useEffect } from "react";
 import { COLUMNS } from "./usersTable.config";
 
 export function UsersTable() {
-  const { users, setSelectedUsers, getUsers } = useUsersList();
+  const { users, setSelectedUsers, selectedUsers, getUsers } = useUsersList();
   const rowSelection: TableProps<TableUser>["rowSelection"] = {
+    selectedRowKeys: selectedUsers,
     onChange: (selectedRowKeys: React.Key[]) => {
       setSelectedUsers(selectedRowKeys);
     },
