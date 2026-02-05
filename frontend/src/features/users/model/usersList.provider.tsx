@@ -7,6 +7,7 @@ import { showNotification } from "../../../shared/ui/showNotification/showNotifi
 import { getErrorMessage } from "../../../shared/lib/getErrorMessage";
 import { API_ROUTES } from "../../../shared/api/apiRoutes";
 import { apiClient } from "../../../shared/api/apiClient";
+import { castTableUsers } from "../lib/castTableUser";
 
 interface Props {
   children: React.ReactNode;
@@ -21,27 +22,7 @@ export function UsersListProvider({ children }: Props) {
     try {
       setIsLoading(true);
       const users = await apiClient.get<User[]>(API_ROUTES.USERS.MAIN);
-      const tableUsers = users.map((user) => {
-        const {
-          id: key,
-          firstName,
-          lastName,
-          status,
-          job,
-          email,
-          lastLoginAt,
-        } = user;
-        return {
-          key,
-          name: firstName + " " + lastName,
-          status,
-          job: job ?? "N/A",
-          email,
-          lastLoginAt: lastLoginAt
-            ? new Date(lastLoginAt).toLocaleString()
-            : "-",
-        };
-      });
+      const tableUsers = castTableUsers(users);
       setUsers(tableUsers);
     } catch (error) {
       const errorMessage = getErrorMessage(error);
