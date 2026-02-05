@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { STATUS_CODES } from "@constants/statusCodes.js";
-import { usersService } from "@services/users.service.js";
-import { validateUserIds } from "validators/validateUserIds.js";
-import { JwtTokenError } from "@errors/JwtTokenError.js";
-import { ERROR_MESSAGES } from "@constants/errorMessages.js";
-import { castFrontendType } from "@middlewares/castFrontendType.js";
+import { usersService } from "../services/users.service.js";
+import { validateUserIds } from "../validators/validateUserIds.js";
+import { STATUS_CODES } from "../constants/statusCodes.js";
+import { JwtTokenError } from "../errors/JwtTokenError.js";
+import { ERROR_MESSAGES } from "../constants/errorMessages.js";
+import { castFrontendType } from "../middlewares/castFrontendType.js";
 
 class UsersController {
   private usersService = usersService;

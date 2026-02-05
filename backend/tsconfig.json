@@ -11,19 +11,7 @@
     "resolveJsonModule": true,
     "strict": true,
     "skipLibCheck": true,
-    "noEmitOnError": true,
-    "baseUrl": "src",
-    "paths": {
-      "@routes/*": ["routes/*"],
-      "@controllers/*": ["controllers/*"],
-      "@config/*": ["config/*"],
-      "@database/*": ["database/*"],
-      "@models/*": ["models/*"],
-      "@services/*": ["services/*"],
-      "@errors/*": ["errors/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@constants/*": ["constants/*"]
-    }
+    "noEmitOnError": true
   },
   "include": ["src", "src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

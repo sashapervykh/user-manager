@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { JwtTokenError } from "@errors/JwtTokenError.js";
-import { ERROR_MESSAGES } from "@constants/errorMessages.js";
-import { AUTH_HEADER_START } from "@constants/authHeaderStart.js";
-import { ENV } from "@config/env.js";
-import { database } from "@database/database.js";
-import { USER_STATUS } from "@constants/userStatus.js";
-import { BlockedError } from "@errors/BlockedError.js";
+import { database } from "../database/database.js";
+import { ERROR_MESSAGES } from "../constants/errorMessages.js";
+import { JwtTokenError } from "../errors/JwtTokenError.js";
+import { USER_STATUS } from "../constants/userStatus.js";
+import { BlockedError } from "../errors/BlockedError.js";
+import { AUTH_HEADER_START } from "../constants/authHeaderStart.js";
+import { ENV } from "../config/env.js";
 
 export async function requireAuth(
   req: Request,
