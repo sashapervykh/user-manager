@@ -1,5 +1,5 @@
-import { ENV_NAMES } from "@constants/envNames.js";
 import dotenv from "dotenv";
+import { ENV_NAMES } from "../constants/envNames.js";
 
 dotenv.config();
 

@@ -33,13 +33,6 @@ export default [
         { argsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/explicit-module-boundary-types": "off",
-      "import/order": [
-        "warn",
-        {
-          groups: ["builtin", "external", "internal"],
-          "newlines-between": "always",
-        },
-      ],
     },
   })),
 ];

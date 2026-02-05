@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { UserRegisterDto } from "@models/dtos/UserRegisterDto.js";
-import { authService } from "@services/auth.service.js";
-import { ValidationError } from "@errors/ValidationError.js";
-import { STATUS_CODES } from "@constants/statusCodes.js";
-import { ERROR_MESSAGES } from "@constants/errorMessages.js";
-import { UserLoginDto } from "@models/dtos/UserLoginDto.js";
+import { authService } from "../services/auth.service.js";
+import { UserRegisterDto } from "../models/dtos/UserRegisterDto.js";
+import { ERROR_MESSAGES } from "../constants/errorMessages.js";
+import { ValidationError } from "../errors/ValidationError.js";
+import { STATUS_CODES } from "../constants/statusCodes.js";
+import { UserLoginDto } from "../models/dtos/UserLoginDto.js";
 
 class AuthController {
   private authService = authService;

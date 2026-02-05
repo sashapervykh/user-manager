@@ -1,15 +1,14 @@
-import crypto from "crypto";
-
-import bcrypt from "bcrypt";
+import crypto from "node:crypto";
 import jwt from "jsonwebtoken";
-import { database } from "@database/database.js";
-import { UserRegisterDto } from "@models/dtos/UserRegisterDto.js";
-import { USER_STATUS } from "@constants/userStatus.js";
-import { UserLoginDto } from "@models/dtos/UserLoginDto.js";
-import { AuthenticationError } from "@errors/AuthenticationError.js";
-import { BlockedError } from "@errors/BlockedError.js";
-import { ENV } from "@config/env.js";
-import { castFrontendType } from "@middlewares/castFrontendType.js";
+import bcrypt from "bcrypt";
+import { database } from "../database/database.js";
+import { UserRegisterDto } from "../models/dtos/UserRegisterDto.js";
+import { USER_STATUS } from "../constants/userStatus.js";
+import { castFrontendType } from "../middlewares/castFrontendType.js";
+import { UserLoginDto } from "../models/dtos/UserLoginDto.js";
+import { AuthenticationError } from "../errors/AuthenticationError.js";
+import { BlockedError } from "../errors/BlockedError.js";
+import { ENV } from "../config/env.js";
 
 class AuthService {
   private database = database;

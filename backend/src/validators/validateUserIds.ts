@@ -1,5 +1,5 @@
-import { ERROR_MESSAGES } from "@constants/errorMessages.js";
-import { ValidationError } from "@errors/ValidationError.js";
+import { ERROR_MESSAGES } from "../constants/errorMessages.js";
+import { ValidationError } from "../errors/ValidationError.js";
 
 export function validateUserIds(data: unknown) {
   if (!data) {

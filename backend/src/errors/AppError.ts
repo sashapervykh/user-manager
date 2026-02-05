@@ -1,5 +1,5 @@
-import { ERROR_MESSAGES } from "@constants/errorMessages.js";
-import { STATUS_CODES } from "@constants/statusCodes.js";
+import { ERROR_MESSAGES } from "../constants/errorMessages.js";
+import { STATUS_CODES } from "../constants/statusCodes.js";
 
 export class AppError extends Error {
   statusCode: number;
