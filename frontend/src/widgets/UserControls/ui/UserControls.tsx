@@ -5,14 +5,9 @@ export function UsersControls() {
   const { controlsActions } = useControlsActions();
   return (
     <div className="d-flex gap-1 h-3rem ms-auto me-0 mb-3">
-      {controlsActions.map((elem) => {
-        const { tooltip, buttonContent, handleClick } = elem;
-        return (
-          <TooltipButton tooltip={tooltip} handleClick={handleClick}>
-            {buttonContent}
-          </TooltipButton>
-        );
-      })}
+      {controlsActions.map((action) => (
+        <TooltipButton {...action} />
+      ))}
     </div>
   );
 }

@@ -12,8 +12,8 @@ import {
 import { useUsersList } from "../../../features/users/model/useUsersList";
 
 interface ControlsAction {
-  type: UserControlsType;
-  buttonContent: ReactNode;
+  key: UserControlsType;
+  children: ReactNode;
   tooltip: string;
   handleClick: () => Promise<void>;
 }
@@ -22,9 +22,9 @@ export const useControlsActions = () => {
   const { blockUsers, unblockUsers } = useUsersList();
   const controlsActions: ControlsAction[] = [
     {
-      type: USER_CONTROLS_TYPES.BLOCK,
+      key: USER_CONTROLS_TYPES.BLOCK,
       tooltip: "Block selected",
-      buttonContent: (
+      children: (
         <>
           Block <LockOutlined />
         </>
@@ -32,21 +32,21 @@ export const useControlsActions = () => {
       handleClick: blockUsers,
     },
     {
-      type: USER_CONTROLS_TYPES.UNBLOCK,
+      key: USER_CONTROLS_TYPES.UNBLOCK,
       tooltip: "Unblock selected",
-      buttonContent: <UnlockOutlined />,
+      children: <UnlockOutlined />,
       handleClick: unblockUsers,
     },
     {
-      type: USER_CONTROLS_TYPES.DELETE,
+      key: USER_CONTROLS_TYPES.DELETE,
       tooltip: "Delete selected",
-      buttonContent: <DeleteOutlined />,
+      children: <DeleteOutlined />,
       handleClick: blockUsers,
     },
     {
-      type: USER_CONTROLS_TYPES.DELETE_UNVERIFIED,
+      key: USER_CONTROLS_TYPES.DELETE_UNVERIFIED,
       tooltip: "Delete all unverified",
-      buttonContent: <ClearOutlined />,
+      children: <ClearOutlined />,
       handleClick: blockUsers,
     },
   ];
