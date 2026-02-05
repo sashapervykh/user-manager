@@ -128,6 +128,16 @@ class Database {
     const result = await this.pool.query<User>(query, [id]);
     return result.rows[0]?.last_login_at;
   }
+
+  async updateUserStatus(token: string) {
+    const query = `
+  UPDATE users
+  SET status='active',
+  verification_token = NULL
+  WHERE verification_token = $1`;
+    const { rowCount } = await this.pool.query(query, [token]);
+    return rowCount;
+  }
 }
 
 export const database = new Database();

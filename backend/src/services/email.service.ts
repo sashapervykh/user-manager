@@ -1,4 +1,7 @@
 import { transporter } from "../config/transporter.js";
+import { ERROR_MESSAGES } from "../constants/errorMessages.js";
+import { database } from "../database/database.js";
+import { TokenError } from "../errors/TokenError.js";
 
 class EmailService {
   async sendVerificationEmail(
@@ -18,6 +21,11 @@ class EmailService {
     } catch (err) {
       console.error("Error while sending mail", err);
     }
+  }
+
+  async verifyEmailByToken(token: string) {
+    const updatedRows = await database.updateUserStatus(token);
+    if (!updatedRows) throw new TokenError(ERROR_MESSAGES.INVALID_TOKEN);
   }
 }
 
