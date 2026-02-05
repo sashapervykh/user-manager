@@ -1,18 +1,14 @@
 import { TooltipButton } from "../../../shared/ui/TooltipButton/TooltipButton";
-import { UserControlsActions } from "./userControlsActions";
+import { useControlsActions } from "../model/useControlsActions";
 
 export function UsersControls() {
+  const { controlsActions } = useControlsActions();
   return (
     <div className="d-flex gap-1 h-3rem ms-auto me-0 mb-3">
-      {UserControlsActions.map((elem) => {
-        const { tooltip, buttonContent } = elem;
+      {controlsActions.map((elem) => {
+        const { tooltip, buttonContent, handleClick } = elem;
         return (
-          <TooltipButton
-            tooltip={tooltip}
-            handleClick={() => {
-              console.log(elem.type);
-            }}
-          >
+          <TooltipButton tooltip={tooltip} handleClick={handleClick}>
             {buttonContent}
           </TooltipButton>
         );

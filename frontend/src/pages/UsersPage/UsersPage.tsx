@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Table, Tooltip } from "antd";
+import { Table } from "antd";
 import type { TableColumnsType, TableProps } from "antd";
 import Title from "antd/es/typography/Title";
-import {
-  ClearOutlined,
-  DeleteOutlined,
-  LockOutlined,
-  UnlockOutlined,
-} from "@ant-design/icons";
 import { useUser } from "../../entities/user/model/useUser";
 import { useUsersList } from "../../features/users/model/useUsersList";
 import type { TableUser } from "../../features/users/model/types/TableUser";
