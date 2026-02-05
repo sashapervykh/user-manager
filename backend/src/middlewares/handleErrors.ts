@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "@errors/AppError.js";
-import { STATUS_CODES } from "@constants/statusCodes.js";
+import { AppError } from "../errors/AppError.js";
+import { STATUS_CODES } from "../constants/statusCodes.js";
 
 export function handleErrors(
   error: Error | AppError,

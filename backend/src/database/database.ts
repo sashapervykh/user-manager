@@ -1,11 +1,11 @@
-import pool from "@config/db.js";
-import { SORT_COLUMNS } from "@constants/sortColumns.js";
-import { SORT_ORDER } from "@constants/sortOrder.js";
-import { USER_STATUS } from "@constants/userStatus.js";
-import { DuplicationError } from "@errors/DuplicationError.js";
-import { UserCreateDTO } from "@models/dtos/UserCreateDto.js";
-import { User } from "@models/entities/user.entity.js";
 import { DatabaseError } from "pg";
+import pool from "../config/db.js";
+import { UserCreateDTO } from "../models/dtos/UserCreateDto.js";
+import { DuplicationError } from "../errors/DuplicationError.js";
+import { User } from "../models/entities/user.entity.js";
+import { USER_STATUS } from "../constants/userStatus.js";
+import { SORT_COLUMNS } from "../constants/sortColumns.js";
+import { SORT_ORDER } from "../constants/sortOrder.js";
 
 class Database {
   private pool = pool;

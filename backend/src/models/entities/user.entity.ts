@@ -1,4 +1,4 @@
-import { UserStatus } from "@models/types/userStatus.type.js";
+import { UserStatus } from "../types/userStatus.type.js";
 
 export interface User {
   id: string;

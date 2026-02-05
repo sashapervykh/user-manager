@@ -1,5 +1,5 @@
-import { database } from "@database/database.js";
-import { castFrontendType } from "@middlewares/castFrontendType.js";
+import { database } from "../database/database.js";
+import { castFrontendType } from "../middlewares/castFrontendType.js";
 
 class UsersService {
   private database = database;
