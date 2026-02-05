@@ -1,11 +1,12 @@
 import { database } from "@database/database.js";
+import { castFrontendType } from "@middlewares/castFrontendType.js";
 
 class UsersService {
   private database = database;
 
   async getUsers(sortBy: string | undefined, sortOrder: string | undefined) {
     const users = await this.database.getAllUsers(sortBy, sortOrder);
-    return users;
+    return users.map((user) => castFrontendType(user));
   }
 
   async blockUsers(userIds: string[]) {

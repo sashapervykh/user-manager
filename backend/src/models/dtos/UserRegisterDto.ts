@@ -3,4 +3,5 @@ export interface UserRegisterDto {
   lastName: string;
   email: string;
   password: string;
+  job: string | undefined;
 }

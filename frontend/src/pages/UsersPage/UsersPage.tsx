@@ -11,6 +11,7 @@ import {
 import { useUser } from "../../entities/user/model/useUser";
 import { useUsersList } from "../../features/users/model/useUsersList";
 import type { TableUser } from "../../features/users/model/types/TableUser";
+import { UsersControls } from "../../widgets/UserControls/ui/UserControls";
 
 const columns: TableColumnsType<TableUser> = [
   {
@@ -59,35 +60,7 @@ export function UsersPage() {
         <Title className="text-center mt-0 mb-4" level={2}>
           Let's manage some users!
         </Title>
-        <div className="d-flex gap-1 h-3rem ms-auto me-0 mb-3">
-          <Tooltip placement="topLeft" title="Block selected">
-            <Button
-              className="h-100"
-              type="primary"
-              size="large"
-              onClick={() => {
-                blockUsers(chosenUsers);
-              }}
-            >
-              Block <LockOutlined />
-            </Button>
-          </Tooltip>
-          <Tooltip placement="topLeft" title="Unblock selected">
-            <Button className="h-100" type="primary" size="large">
-              <UnlockOutlined />
-            </Button>
-          </Tooltip>
-          <Tooltip placement="topLeft" title="Delete selected">
-            <Button className="h-100" type="primary" size="large">
-              <DeleteOutlined />
-            </Button>
-          </Tooltip>
-          <Tooltip placement="topLeft" title="Delete all unverified">
-            <Button className="h-100" type="primary" size="large">
-              <ClearOutlined />
-            </Button>
-          </Tooltip>
-        </div>
+        <UsersControls />
         <div>
           <Table<TableUser>
             rowSelection={{ type: "checkbox", ...rowSelection }}

@@ -24,10 +24,10 @@ class AuthController {
       if (!email || !password || !first_name || !last_name) {
         throw new ValidationError(ERROR_MESSAGES.REGISTER_VALIDATION_ERROR);
       }
-      const user = await authService.register(req.body);
+      const { user, token } = await authService.register(req.body);
       res
         .status(STATUS_CODES.CREATED)
-        .json({ message: "User registered successfully", user });
+        .json({ message: "User registered successfully", user, token });
     } catch (error) {
       next(error);
     }
