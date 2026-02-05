@@ -18,7 +18,7 @@ export async function requireAuth(
     const id = extractIdFromToken(token);
     const user = await database.getUserById(id);
     if (!user) {
-      throw new Error(ERROR_MESSAGES.NOT_EXIST);
+      throw new JwtTokenError(ERROR_MESSAGES.NOT_EXIST);
     }
     if (user.status === USER_STATUS.BLOCKED) {
       throw new BlockedError();

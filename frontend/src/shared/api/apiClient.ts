@@ -1,3 +1,6 @@
+import { handleApiErrors } from "../lib/handleApiErrors";
+import { TOKEN_STORAGE } from "../lib/tokenStorage";
+
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 class ApiClient {
@@ -5,7 +8,7 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {},
   ): Promise<T> {
-    const token = localStorage.getItem("token");
+    const token = TOKEN_STORAGE.get();
     const headers: HeadersInit = {
       "Content-Type": "application/json",
     };
@@ -16,18 +19,12 @@ class ApiClient {
       ...options,
       headers,
     });
-
     if (!response.ok) {
-      const data = await response.json();
-      console.error(data);
-      const message = data.message;
-      throw new Error(message);
+      await handleApiErrors(response);
     }
-
     if (response.status === 204) {
       return {} as T;
     }
-
     return response.json();
   }
 
