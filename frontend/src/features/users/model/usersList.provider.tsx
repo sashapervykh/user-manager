@@ -8,12 +8,17 @@ import { getErrorMessage } from "../../../shared/lib/getErrorMessage";
 import { API_ROUTES } from "../../../shared/api/apiRoutes";
 import { apiClient } from "../../../shared/api/apiClient";
 import { castTableUsers } from "../lib/castTableUser";
+import { shouldRedirect } from "../lib/shouldRedirect";
+import { useNavigate } from "react-router-dom";
+import { TOKEN_STORAGE } from "../../../shared/lib/tokenStorage";
+import { useUser } from "../../../entities/user/model/useUser";
 
 interface Props {
   children: React.ReactNode;
 }
 
 export function UsersListProvider({ children }: Props) {
+  const { setUser } = useUser();
   const [users, setUsers] = useState<TableUser[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<React.Key[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +30,10 @@ export function UsersListProvider({ children }: Props) {
       const tableUsers = castTableUsers(users);
       setUsers(tableUsers);
     } catch (error) {
+      if (shouldRedirect(error)) {
+        TOKEN_STORAGE.remove();
+        setUser(null);
+      }
       const errorMessage = getErrorMessage(error);
       showNotification({
         type: "error",

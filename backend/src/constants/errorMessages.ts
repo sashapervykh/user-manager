@@ -11,5 +11,5 @@ export const ERROR_MESSAGES = {
   BLOCKED_ERROR: "Your account has been blocked by you or other user",
   NO_TOKEN_ERROR: "No token provided",
   INVALID_TOKEN: "Invalid token",
-  NOT_EXIST: "User with this token does not exist",
+  NOT_EXIST: "Your account has been deleted by you or other user",
 };
