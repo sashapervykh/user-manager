@@ -46,7 +46,7 @@ class AuthService {
     if (!user) {
       throw new AuthenticationError();
     }
-    const { password_hash, ...responseData } = user;
+    const { password_hash } = user;
     const isCorrect = await this.verifyPassword(password, password_hash);
     if (!isCorrect) {
       throw new AuthenticationError();
