@@ -13,12 +13,12 @@ export function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route element={<AuthLayout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path={ROUTES.USERS} element={<UsersPage />} />
+          </Route>
           <Route element={<PublicOnlyRoute />}>
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-          </Route>
-          <Route element={<ProtectedRoute />}>
-            <Route path={ROUTES.USERS} element={<UsersPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>

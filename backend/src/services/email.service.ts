@@ -1,17 +1,11 @@
-import nodemailer from "nodemailer";
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.example.com",
-  port: 587,
-  secure: false, // use STARTTLS (upgrade connection to TLS after connecting)
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+import { transporter } from "../config/transporter.js";
 
 class EmailService {
-  async sendEmail(email: string, name: string, verificationUrl: string) {
+  async sendVerificationEmail(
+    email: string,
+    name: string,
+    verificationUrl: string,
+  ) {
     try {
       await transporter.sendMail({
         from: "The App Team",

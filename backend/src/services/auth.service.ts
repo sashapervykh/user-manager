@@ -9,6 +9,7 @@ import { UserLoginDto } from "../models/dtos/UserLoginDto.js";
 import { AuthenticationError } from "../errors/AuthenticationError.js";
 import { BlockedError } from "../errors/BlockedError.js";
 import { ENV } from "../config/env.js";
+import { emailService } from "./email.service.js";
 
 class AuthService {
   private database = database;
@@ -23,6 +24,8 @@ class AuthService {
     } = registerUserDto;
     const password_hash = await this.getPasswordHash(password);
     const verification_token = this.getEmailToken();
+    const verificationLink = this.getVerificationLink(verification_token);
+    emailService.sendVerificationEmail(email, first_name, verificationLink);
     const user = await this.database.createUser({
       first_name,
       last_name,
@@ -67,6 +70,10 @@ class AuthService {
 
   private getEmailToken() {
     return crypto.randomBytes(32).toString("hex");
+  }
+
+  private getVerificationLink(verificationToken: string) {
+    return `${ENV.FRONTEND_SOURCE}/verify-email?token=${verificationToken}`;
   }
 
   private getJwtToken(userId: string) {
