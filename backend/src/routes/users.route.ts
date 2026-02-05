@@ -3,6 +3,7 @@ import { Router } from "express";
 
 const usersRouter = Router();
 usersRouter.get("/", usersController.getUsers);
+usersRouter.post("/me", usersController.getUser);
 usersRouter.put("/block", usersController.blockUsers);
 usersRouter.put("/unblock", usersController.unblockUsers);
 usersRouter.delete("/", usersController.deleteUsers);

@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { STATUS_CODES } from "@constants/statusCodes.js";
 import { usersService } from "@services/users.service.js";
 import { validateUserIds } from "validators/validateUserIds.js";
+import { JwtTokenError } from "@errors/JwtTokenError.js";
+import { ERROR_MESSAGES } from "@constants/errorMessages.js";
+import { castFrontendType } from "@middlewares/castFrontendType.js";
 
 class UsersController {
   private usersService = usersService;
@@ -36,6 +39,17 @@ class UsersController {
     try {
       await usersService.deleteUnverified();
       res.status(STATUS_CODES.NO_CONTENT).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user) {
+        throw new JwtTokenError(ERROR_MESSAGES.INVALID_TOKEN);
+      }
+      res.status(STATUS_CODES.OK).json({ user: castFrontendType(req.user) });
     } catch (error) {
       next(error);
     }

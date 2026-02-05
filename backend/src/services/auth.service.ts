@@ -9,20 +9,35 @@ import { UserLoginDto } from "@models/dtos/UserLoginDto.js";
 import { AuthenticationError } from "@errors/AuthenticationError.js";
 import { BlockedError } from "@errors/BlockedError.js";
 import { ENV } from "@config/env.js";
+import { castFrontendType } from "@middlewares/castFrontendType.js";
 
 class AuthService {
   private database = database;
 
   async register(registerUserDto: UserRegisterDto) {
-    const { password, ...userData } = registerUserDto;
+    const {
+      password,
+      email,
+      job,
+      firstName: first_name,
+      lastName: last_name,
+    } = registerUserDto;
     const password_hash = await this.getPasswordHash(password);
     const verification_token = this.getEmailToken();
-    return await this.database.createUser({
-      ...userData,
+    const user = await this.database.createUser({
+      first_name,
+      last_name,
+      email,
+      job,
       status: USER_STATUS.UNVERIFIED,
       password_hash,
       verification_token,
     });
+    const token = this.getJwtToken(user.id);
+    return {
+      user: castFrontendType(user),
+      token: token,
+    };
   }
 
   async login(userLoginDto: UserLoginDto) {
@@ -44,7 +59,11 @@ class AuthService {
     if (!newLoginTime) {
       throw new AuthenticationError();
     }
-    return { user: { ...responseData, last_login_at: newLoginTime }, token };
+    user.last_login_at = newLoginTime;
+    return {
+      user: castFrontendType(user),
+      token,
+    };
   }
 
   private getEmailToken() {

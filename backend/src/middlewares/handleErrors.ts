@@ -13,9 +13,7 @@ export function handleErrors(
       message: error.message,
     });
   }
-
   console.error("Unexpected error:", error);
-
   res.status(STATUS_CODES.INTERNAL_ERROR).json({
     message: "Internal server error",
   });
