@@ -27,7 +27,7 @@ export const UserControlsActions: UserControlsAction[] = [
     ),
   },
   {
-    type: USER_CONTROLS_TYPES.DELETE_UNVERIFIED,
+    type: USER_CONTROLS_TYPES.UNBLOCK,
     tooltip: "Unblock selected",
     buttonContent: <UnlockOutlined />,
   },
