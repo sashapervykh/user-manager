@@ -19,7 +19,8 @@ interface ControlsAction {
 }
 
 export const useControlsActions = () => {
-  const { blockUsers, unblockUsers } = useUsersList();
+  const { blockUsers, unblockUsers, deleteUnverified, deleteUsers } =
+    useUsersList();
   const controlsActions: ControlsAction[] = [
     {
       key: USER_CONTROLS_TYPES.BLOCK,
@@ -41,13 +42,13 @@ export const useControlsActions = () => {
       key: USER_CONTROLS_TYPES.DELETE,
       tooltip: "Delete selected",
       children: <DeleteOutlined />,
-      handleClick: blockUsers,
+      handleClick: deleteUsers,
     },
     {
       key: USER_CONTROLS_TYPES.DELETE_UNVERIFIED,
       tooltip: "Delete all unverified",
       children: <ClearOutlined />,
-      handleClick: blockUsers,
+      handleClick: deleteUnverified,
     },
   ];
 

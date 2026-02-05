@@ -72,6 +72,44 @@ export function UsersListProvider({ children }: Props) {
     }
   };
 
+  const deleteUsers = async () => {
+    try {
+      setIsLoading(true);
+      await apiClient.delete(API_ROUTES.USERS.MAIN, {
+        userIds: selectedUsers,
+      });
+      await getUsers();
+      setSelectedUsers([]);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showNotification({
+        type: "error",
+        title: "Deleting users failed",
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteUnverified = async () => {
+    try {
+      setIsLoading(true);
+      await apiClient.delete(API_ROUTES.USERS.DELETE_UNVERIFIED);
+      await getUsers();
+      setSelectedUsers([]);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showNotification({
+        type: "error",
+        title: "Deleting unverified failed",
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const value: UsersListContextType = {
     selectedUsers,
     setSelectedUsers,
@@ -80,6 +118,8 @@ export function UsersListProvider({ children }: Props) {
     unblockUsers,
     users,
     isLoading,
+    deleteUnverified,
+    deleteUsers,
   };
 
   return (

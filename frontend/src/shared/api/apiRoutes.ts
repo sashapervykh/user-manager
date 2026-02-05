@@ -5,5 +5,6 @@ export const API_ROUTES = {
     ME: `/users/me`,
     BLOCK: "/users/block",
     UNBLOCK: "/users/unblock",
+    DELETE_UNVERIFIED: "/users/unverified",
   },
 };

@@ -50,6 +50,12 @@ class ApiClient {
       method: "GET",
     });
   }
+  delete<T>(endpoint: string, data?: unknown) {
+    return this.request<T>(endpoint, {
+      method: "DELETE",
+      body: JSON.stringify(data),
+    });
+  }
 }
 
 export const apiClient = new ApiClient();

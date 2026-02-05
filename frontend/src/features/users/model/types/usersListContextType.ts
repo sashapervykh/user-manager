@@ -6,6 +6,8 @@ export interface UsersListContextType {
   setSelectedUsers: (selectedUsersId: React.Key[]) => void;
   blockUsers: () => Promise<void>;
   unblockUsers: () => Promise<void>;
+  deleteUsers: () => Promise<void>;
+  deleteUnverified: () => Promise<void>;
   getUsers: () => Promise<void>;
   isLoading: boolean;
 }
