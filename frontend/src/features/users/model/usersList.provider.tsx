@@ -21,7 +21,6 @@ export function UsersListProvider({ children }: Props) {
     try {
       setIsLoading(true);
       const users = await apiClient.get<User[]>(API_ROUTES.USERS.MAIN);
-      console.log(users);
       const tableUsers = users.map((user) => {
         const {
           id: key,
