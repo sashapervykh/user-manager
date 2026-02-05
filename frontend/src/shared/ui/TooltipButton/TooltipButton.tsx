@@ -5,9 +5,15 @@ interface Props {
   tooltip: string;
   children: ReactNode;
   handleClick: () => void;
+  disabled?: boolean;
 }
 
-export function TooltipButton({ tooltip, children, handleClick }: Props) {
+export function TooltipButton({
+  tooltip,
+  children,
+  handleClick,
+  disabled = false,
+}: Props) {
   return (
     <Tooltip placement="topLeft" title={tooltip}>
       <Button
@@ -15,6 +21,7 @@ export function TooltipButton({ tooltip, children, handleClick }: Props) {
         type="primary"
         size="large"
         onClick={handleClick}
+        disabled={disabled}
       >
         {children}
       </Button>

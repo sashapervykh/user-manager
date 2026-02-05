@@ -23,13 +23,7 @@ export function useApi() {
   };
 
   return {
-    register,
     isLoading,
-    error,
-    setError,
     setIsLoading,
-    checkAuth,
-    logout,
-    login,
   };
 }
