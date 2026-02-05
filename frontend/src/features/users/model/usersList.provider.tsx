@@ -52,6 +52,10 @@ export function UsersListProvider({ children }: Props) {
       await getUsers();
       setSelectedUsers([]);
     } catch (error) {
+      if (shouldRedirect(error)) {
+        TOKEN_STORAGE.remove();
+        setUser(null);
+      }
       const errorMessage = getErrorMessage(error);
       showNotification({
         type: "error",
@@ -70,6 +74,10 @@ export function UsersListProvider({ children }: Props) {
       await getUsers();
       setSelectedUsers([]);
     } catch (error) {
+      if (shouldRedirect(error)) {
+        TOKEN_STORAGE.remove();
+        setUser(null);
+      }
       const errorMessage = getErrorMessage(error);
       showNotification({
         type: "error",
@@ -90,6 +98,10 @@ export function UsersListProvider({ children }: Props) {
       await getUsers();
       setSelectedUsers([]);
     } catch (error) {
+      if (shouldRedirect(error)) {
+        TOKEN_STORAGE.remove();
+        setUser(null);
+      }
       const errorMessage = getErrorMessage(error);
       showNotification({
         type: "error",
@@ -108,6 +120,10 @@ export function UsersListProvider({ children }: Props) {
       await getUsers();
       setSelectedUsers([]);
     } catch (error) {
+      if (shouldRedirect(error)) {
+        TOKEN_STORAGE.remove();
+        setUser(null);
+      }
       const errorMessage = getErrorMessage(error);
       showNotification({
         type: "error",
