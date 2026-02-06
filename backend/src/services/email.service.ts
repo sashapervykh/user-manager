@@ -1,4 +1,3 @@
-import { transporter } from "../config/transporter.js";
 import { ERROR_MESSAGES } from "../constants/errorMessages.js";
 import { database } from "../database/database.js";
 import { TokenError } from "../errors/TokenError.js";

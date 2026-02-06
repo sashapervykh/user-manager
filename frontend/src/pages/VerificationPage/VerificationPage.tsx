@@ -19,9 +19,13 @@ export function VerificationPage() {
 
     const verifyEmail = async () => {
       try {
-        await apiClient.post(`${API_ROUTES.AUTH.VERIFY_EMAIL}${token}`);
+        const response = await apiClient.post(
+          `${API_ROUTES.AUTH.VERIFY_EMAIL}${token}`,
+        );
+        console.log(response);
         setResult("Email successfully verified");
-      } catch {
+      } catch (err) {
+        console.log(err);
         setResult(
           "Verification failed. The link may be expired or already used.",
         );
