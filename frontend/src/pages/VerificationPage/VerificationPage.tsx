@@ -31,7 +31,7 @@ export function VerificationPage() {
     };
 
     verifyEmail();
-  }, [token]);
+  }, []);
 
   return (
     <>
