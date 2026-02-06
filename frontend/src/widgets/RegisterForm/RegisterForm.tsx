@@ -32,7 +32,13 @@ export function RegisterForm() {
         <Form.Item<FieldType>
           label="First name:"
           name="firstName"
-          rules={[{ required: true, message: "Please input your first name!" }]}
+          rules={[
+            {
+              required: true,
+              whitespace: true,
+              message: "Please input your first name!",
+            },
+          ]}
         >
           <Input size="large" />
         </Form.Item>
@@ -40,7 +46,11 @@ export function RegisterForm() {
           label="Last name:"
           name="lastName"
           rules={[
-            { required: true, message: "Please input your second name!" },
+            {
+              required: true,
+              whitespace: true,
+              message: "Please input your second name!",
+            },
           ]}
         >
           <Input size="large" />
@@ -62,7 +72,11 @@ export function RegisterForm() {
           label="Password:"
           name="password"
           rules={[
-            { required: true, message: "Please input your password!" },
+            {
+              required: true,
+              whitespace: true,
+              message: "Please input your password!",
+            },
             comparePasswords("confirmation"),
           ]}
         >
@@ -72,7 +86,11 @@ export function RegisterForm() {
           label="Confirm password:"
           name="confirmation"
           rules={[
-            { required: true, message: "Please confirm your password!" },
+            {
+              required: true,
+              whitespace: true,
+              message: "Please confirm your password!",
+            },
             comparePasswords("password"),
           ]}
         >
