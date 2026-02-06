@@ -10,6 +10,6 @@ export const ERROR_MESSAGES = {
   AUTHENTICATION_ERROR: "Invalid email or password",
   BLOCKED_ERROR: "Your account has been blocked by you or other user",
   NO_TOKEN_ERROR: "No token provided",
-  INVALID_TOKEN: "Invalid token",
+  INVALID_TOKEN: "Invalid or expired token",
   NOT_EXIST: "Your account has been deleted by you or other user",
 };
