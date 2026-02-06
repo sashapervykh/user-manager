@@ -5,6 +5,8 @@ export const COLUMNS: TableColumnsType<TableUser> = [
   {
     title: "Name",
     dataIndex: "name",
+    defaultSortOrder: "ascend",
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
     title: "Job",

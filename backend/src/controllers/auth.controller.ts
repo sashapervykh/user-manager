@@ -5,6 +5,8 @@ import { ERROR_MESSAGES } from "../constants/errorMessages.js";
 import { ValidationError } from "../errors/ValidationError.js";
 import { STATUS_CODES } from "../constants/statusCodes.js";
 import { UserLoginDto } from "../models/dtos/UserLoginDto.js";
+import { emailService } from "../services/email.service.js";
+import { TokenError } from "../errors/TokenError.js";
 
 class AuthController {
   private authService = authService;
@@ -45,6 +47,24 @@ class AuthController {
       }
       const response = await this.authService.login({ email, password });
       res.status(STATUS_CODES.OK).send(response);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  verifyEmailByToken = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    try {
+      let { token } = req.query;
+      if (!token || typeof token !== "string")
+        throw new TokenError(ERROR_MESSAGES.INVALID_TOKEN);
+      await emailService.verifyEmailByToken(token);
+      res
+        .status(STATUS_CODES.OK)
+        .json({ message: "Email successfully verified!" });
     } catch (error) {
       next(error);
     }

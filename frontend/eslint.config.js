@@ -19,6 +19,15 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      "no-console": "off",
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+    },
   },
   { ignores: ["node_modules/**", "dist/**", ".env", ".vite/**"] },
 ]);

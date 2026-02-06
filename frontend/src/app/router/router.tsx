@@ -7,19 +7,21 @@ import { ROUTES } from "../../shared/config/routes";
 import { AuthLayout } from "../../widgets/AuthLayout/AuthLayout";
 import { PublicOnlyRoute } from "../../features/auth/ui/PublicOnlyRoute/PublicOnlyRoute";
 import { ProtectedRoute } from "../../features/auth/ui/ProtectedRoute/ProtectedRoute";
+import { VerificationPage } from "../../pages/VerificationPage/VerificationPage";
 
 export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AuthLayout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path={ROUTES.USERS} element={<UsersPage />} />
+          </Route>
           <Route element={<PublicOnlyRoute />}>
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           </Route>
-          <Route element={<ProtectedRoute />}>
-            <Route path={ROUTES.USERS} element={<UsersPage />} />
-          </Route>
+          <Route path={ROUTES.VERIFY_EMAIL} element={<VerificationPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

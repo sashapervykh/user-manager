@@ -12,7 +12,6 @@ import { getErrorMessage } from "../../../../shared/lib/getErrorMessage";
 
 export function useAuth() {
   const { setUser } = useUser();
-  const [error, setError] = useState<unknown | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const checkAuth = useCallback(async () => {
@@ -40,7 +39,6 @@ export function useAuth() {
 
   const register = async (userRegisterDto: UserRegisterDto) => {
     try {
-      setError(null);
       setIsLoading(true);
       const { user, token } = await apiClient.post<UserResponseDto>(
         API_ROUTES.AUTH.REGISTER,
@@ -68,14 +66,13 @@ export function useAuth() {
         title: "Registration failed",
         description: errorMessage,
       });
+    } finally {
       setIsLoading(false);
-      setError(error);
     }
   };
 
   const login = async (userCreateDto: UserCreateDto) => {
     try {
-      setError(null);
       setIsLoading(true);
       const { user, token } = await apiClient.post<UserResponseDto>(
         API_ROUTES.AUTH.LOGIN,
@@ -94,7 +91,8 @@ export function useAuth() {
         title: "Authentication failed",
         description: errorMessage,
       });
-      setError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,8 +104,6 @@ export function useAuth() {
   return {
     register,
     isLoading,
-    error,
-    setError,
     setIsLoading,
     checkAuth,
     logout,

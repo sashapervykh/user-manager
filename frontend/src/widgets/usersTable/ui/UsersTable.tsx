@@ -2,7 +2,7 @@ import { Table, type TableProps } from "antd";
 import type { TableUser } from "../../../features/users/model/types/TableUser";
 import { useUsersList } from "../../../features/users/model/useUsersList";
 import { useEffect } from "react";
-import { COLUMNS } from "./usersTable.config";
+import { COLUMNS } from "./UsersTable.config";
 
 export function UsersTable() {
   const { users, setSelectedUsers, selectedUsers, getUsers } = useUsersList();
@@ -24,6 +24,7 @@ export function UsersTable() {
           rowSelection={{ type: "checkbox", ...rowSelection }}
           columns={COLUMNS}
           dataSource={users}
+          showSorterTooltip={{ target: "sorter-icon" }}
           size="large"
         />
       </div>

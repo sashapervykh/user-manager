@@ -8,7 +8,7 @@ type FieldType = {
 };
 
 export function LoginForm() {
-  const { login } = useAuth();
+  const { login, isLoading } = useAuth();
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     login(values);
@@ -49,6 +49,7 @@ export function LoginForm() {
             type="primary"
             htmlType="submit"
             size="large"
+            disabled={isLoading}
           >
             Sign In
           </Button>
