@@ -1,7 +1,7 @@
 import Title from "antd/es/typography/Title";
 import { useUser } from "../../entities/user/model/useUser";
 import { UsersControls } from "../../widgets/UserControls/ui/UserControls";
-import { UsersTable } from "../../widgets/usersTable/ui/UsersTable";
+import { UsersTable } from "../../widgets/UsersTable/ui/UsersTable";
 
 export function UsersPage() {
   const { user } = useUser();

@@ -24,6 +24,7 @@ export function UsersTable() {
           rowSelection={{ type: "checkbox", ...rowSelection }}
           columns={COLUMNS}
           dataSource={users}
+          showSorterTooltip={{ target: "sorter-icon" }}
           size="large"
         />
       </div>
