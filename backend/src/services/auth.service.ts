@@ -25,7 +25,6 @@ class AuthService {
     const password_hash = await this.getPasswordHash(password);
     const verification_token = this.getEmailToken();
     const verificationLink = this.getVerificationLink(verification_token);
-    emailService.sendVerificationEmail(email, first_name, verificationLink);
     const user = await this.database.createUser({
       first_name,
       last_name,
@@ -36,6 +35,7 @@ class AuthService {
       verification_token,
     });
     const token = this.getJwtToken(user.id);
+    emailService.sendVerificationEmail(email, first_name, verificationLink);
     return {
       user: castFrontendType(user),
       token: token,
