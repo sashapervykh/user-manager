@@ -13,6 +13,9 @@ import { getErrorMessage } from "../../../../shared/lib/getErrorMessage";
 export function useAuth() {
   const { setUser } = useUser();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [verificationResult, setVerificationResult] = useState(
+    "Verifying your email...",
+  );
 
   const checkAuth = useCallback(async () => {
     setIsLoading(true);
@@ -108,5 +111,7 @@ export function useAuth() {
     checkAuth,
     logout,
     login,
+    setVerificationResult,
+    verificationResult,
   };
 }
