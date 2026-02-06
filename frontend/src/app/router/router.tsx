@@ -7,6 +7,7 @@ import { ROUTES } from "../../shared/config/routes";
 import { AuthLayout } from "../../widgets/AuthLayout/AuthLayout";
 import { PublicOnlyRoute } from "../../features/auth/ui/PublicOnlyRoute/PublicOnlyRoute";
 import { ProtectedRoute } from "../../features/auth/ui/ProtectedRoute/ProtectedRoute";
+import { VerificationPage } from "../../pages/VerificationPage/VerificationPage";
 
 export function AppRouter() {
   return (
@@ -20,6 +21,7 @@ export function AppRouter() {
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
             <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           </Route>
+          <Route path={ROUTES.VERIFY_EMAIL} element={<VerificationPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
