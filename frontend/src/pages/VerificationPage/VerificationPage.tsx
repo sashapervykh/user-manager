@@ -1,10 +1,10 @@
 import Title from "antd/es/typography/Title";
 import { useSearchParams } from "react-router-dom";
-import { memo, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { apiClient } from "../../shared/api/apiClient";
 import { API_ROUTES } from "../../shared/api/apiRoutes";
 
-export const VerificationPage = memo(function VerificationPage() {
+export function VerificationPage() {
   const [searchParams, _] = useSearchParams();
   const token = searchParams.get("token");
   const [result, setResult] = useState("Verifying your email...");
@@ -18,7 +18,7 @@ export const VerificationPage = memo(function VerificationPage() {
         await apiClient.post(`${API_ROUTES.AUTH.VERIFY_EMAIL}${token}`);
         setResult("Email successfully verified");
       } catch {
-        setResult(
+        console.log(
           "Verification failed. The link may be expired or already used.",
         );
       }
@@ -34,4 +34,4 @@ export const VerificationPage = memo(function VerificationPage() {
       </div>
     </>
   );
-});
+}
