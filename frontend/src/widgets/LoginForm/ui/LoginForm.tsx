@@ -38,7 +38,13 @@ export function LoginForm() {
         <Form.Item<FieldType>
           label="Password:"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[
+            {
+              required: true,
+              whitespace: true,
+              message: "Please input your password!",
+            },
+          ]}
         >
           <Input.Password size="large" />
         </Form.Item>
