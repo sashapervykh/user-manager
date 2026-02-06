@@ -136,7 +136,6 @@ class Database {
   verification_token = NULL
   WHERE verification_token = $1`;
     const result = await this.pool.query(query, [token]);
-    console.log(result.rowCount);
     return result.rowCount;
   }
 }
