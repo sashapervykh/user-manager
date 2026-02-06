@@ -4,13 +4,13 @@ import type { User } from "../../../entities/user/model/types/user";
 import type { UsersListContextType } from "./types/usersListContextType";
 import type { TableUser } from "./types/TableUser";
 import { showNotification } from "../../../shared/ui/showNotification/showNotification";
-import { getErrorMessage } from "../../../shared/lib/getErrorMessage";
 import { API_ROUTES } from "../../../shared/api/apiRoutes";
 import { apiClient } from "../../../shared/api/apiClient";
 import { castTableUsers } from "../lib/castTableUser";
-import { shouldRedirect } from "../lib/shouldRedirect";
 import { TOKEN_STORAGE } from "../../../shared/lib/tokenStorage";
 import { useUser } from "../../../entities/user/model/useUser";
+import { getErrorDetails } from "../lib/getErrorDetails";
+import { ERRORS_TITLE } from "../lib/errorsTitle";
 
 interface Props {
   children: React.ReactNode;
@@ -22,116 +22,61 @@ export function UsersListProvider({ children }: Props) {
   const [selectedUsers, setSelectedUsers] = useState<React.Key[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getUsers = async () => {
+  const requestUserApi = async (
+    errorTitle: string,
+    callback?: () => Promise<void>,
+  ) => {
     try {
       setIsLoading(true);
+      if (callback) await callback();
       const users = await apiClient.get<User[]>(API_ROUTES.USERS.MAIN);
       const tableUsers = castTableUsers(users);
       setUsers(tableUsers);
+      setSelectedUsers([]);
     } catch (error) {
-      if (shouldRedirect(error)) {
+      const { message, isRedirecting } = getErrorDetails(error);
+      if (isRedirecting) {
         TOKEN_STORAGE.remove();
         setUser(null);
       }
-      const errorMessage = getErrorMessage(error);
       showNotification({
         type: "error",
-        title: "Getting users failed",
-        description: errorMessage,
+        title: errorTitle,
+        description: message,
       });
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const getUsers = async () => {
+    await requestUserApi(ERRORS_TITLE.GET_ERROR);
   };
 
   const blockUsers = async () => {
-    try {
-      setIsLoading(true);
+    requestUserApi(ERRORS_TITLE.UPDATE_ERROR, async () => {
       await apiClient.put(API_ROUTES.USERS.BLOCK, { userIds: selectedUsers });
-      await getUsers();
-      setSelectedUsers([]);
-    } catch (error) {
-      if (shouldRedirect(error)) {
-        TOKEN_STORAGE.remove();
-        setUser(null);
-      }
-      const errorMessage = getErrorMessage(error);
-      showNotification({
-        type: "error",
-        title: "Blocking users failed",
-        description: errorMessage,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    });
   };
 
   const unblockUsers = async () => {
-    try {
-      setIsLoading(true);
+    requestUserApi(ERRORS_TITLE.UPDATE_ERROR, async () => {
       await apiClient.put(API_ROUTES.USERS.UNBLOCK, { userIds: selectedUsers });
-      await getUsers();
-      setSelectedUsers([]);
-    } catch (error) {
-      if (shouldRedirect(error)) {
-        TOKEN_STORAGE.remove();
-        setUser(null);
-      }
-      const errorMessage = getErrorMessage(error);
-      showNotification({
-        type: "error",
-        title: "Blocking users failed",
-        description: errorMessage,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    });
   };
 
   const deleteUsers = async () => {
-    try {
-      setIsLoading(true);
+    requestUserApi(ERRORS_TITLE.UPDATE_ERROR, async () => {
       await apiClient.delete(API_ROUTES.USERS.MAIN, {
         userIds: selectedUsers,
       });
-      await getUsers();
-      setSelectedUsers([]);
-    } catch (error) {
-      if (shouldRedirect(error)) {
-        TOKEN_STORAGE.remove();
-        setUser(null);
-      }
-      const errorMessage = getErrorMessage(error);
-      showNotification({
-        type: "error",
-        title: "Deleting users failed",
-        description: errorMessage,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    });
   };
 
   const deleteUnverified = async () => {
-    try {
-      setIsLoading(true);
+    requestUserApi(ERRORS_TITLE.UPDATE_ERROR, async () => {
       await apiClient.delete(API_ROUTES.USERS.DELETE_UNVERIFIED);
-      await getUsers();
-      setSelectedUsers([]);
-    } catch (error) {
-      if (shouldRedirect(error)) {
-        TOKEN_STORAGE.remove();
-        setUser(null);
-      }
-      const errorMessage = getErrorMessage(error);
-      showNotification({
-        type: "error",
-        title: "Deleting unverified failed",
-        description: errorMessage,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    });
   };
 
   const value: UsersListContextType = {
