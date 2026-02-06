@@ -84,7 +84,7 @@ export function RegisterForm() {
             type="primary"
             htmlType="submit"
             size="large"
-            disabled={isLoading ? true : false}
+            disabled={isLoading}
           >
             Sign Up
           </Button>
