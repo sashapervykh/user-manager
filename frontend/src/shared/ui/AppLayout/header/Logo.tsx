@@ -1,5 +1,9 @@
-import Text from "antd/es/typography/Text";
+import Link from "antd/es/typography/Link";
 
 export function Logo() {
-  return <Text className="text-primary fs-1 fw-bold">THE APP</Text>;
+  return (
+    <Link href="/" className="text-primary fs-1 fw-bold">
+      THE APP
+    </Link>
+  );
 }
