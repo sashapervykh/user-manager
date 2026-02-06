@@ -2,7 +2,7 @@ import { Table, type TableProps } from "antd";
 import type { TableUser } from "../../../features/users/model/types/TableUser";
 import { useUsersList } from "../../../features/users/model/useUsersList";
 import { useEffect } from "react";
-import { COLUMNS } from "./UsersTable.config";
+import { COLUMNS } from "./usersTableColumns";
 
 export function UsersTable() {
   const { users, setSelectedUsers, selectedUsers, getUsers } = useUsersList();
