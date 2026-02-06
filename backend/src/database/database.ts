@@ -135,8 +135,9 @@ class Database {
   SET status='active',
   verification_token = NULL
   WHERE verification_token = $1`;
-    const { rowCount } = await this.pool.query(query, [token]);
-    return rowCount;
+    const result = await this.pool.query(query, [token]);
+    console.log(result.rowCount);
+    return result.rowCount;
   }
 }
 

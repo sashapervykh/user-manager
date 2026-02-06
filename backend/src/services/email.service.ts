@@ -41,6 +41,7 @@ class EmailService {
 
   async verifyEmailByToken(token: string) {
     const updatedRows = await database.updateUserStatus(token);
+    console.log(updatedRows);
     if (!updatedRows) throw new TokenError(ERROR_MESSAGES.INVALID_TOKEN);
   }
 }

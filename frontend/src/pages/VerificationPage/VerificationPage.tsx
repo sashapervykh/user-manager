@@ -1,36 +1,26 @@
 import Title from "antd/es/typography/Title";
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { apiClient } from "../../shared/api/apiClient";
 import { API_ROUTES } from "../../shared/api/apiRoutes";
 
 export function VerificationPage() {
   const [searchParams, _] = useSearchParams();
   const token = searchParams.get("token");
-  const [result, setResult] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [result, setResult] = useState("Verifying your email...");
+  const hasVerified = useRef<boolean>(false);
 
   useEffect(() => {
-    if (!token) {
-      setResult("Invalid verification link");
-      setIsLoading(false);
-      return;
-    }
-
+    if (hasVerified.current) return;
     const verifyEmail = async () => {
+      hasVerified.current = true;
       try {
-        const response = await apiClient.post(
-          `${API_ROUTES.AUTH.VERIFY_EMAIL}${token}`,
-        );
-        console.log(response);
+        await apiClient.post(`${API_ROUTES.AUTH.VERIFY_EMAIL}${token}`);
         setResult("Email successfully verified");
-      } catch (err) {
-        console.log(err);
+      } catch {
         setResult(
           "Verification failed. The link may be expired or already used.",
         );
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -40,9 +30,7 @@ export function VerificationPage() {
   return (
     <>
       <div className="d-flex flex-column w-100 h-100">
-        <Title className="text-center mt-0 mb-2">
-          {isLoading ? "Verifying your email..." : result}
-        </Title>
+        <Title className="text-center mt-0 mb-2">{result}</Title>
       </div>
     </>
   );
